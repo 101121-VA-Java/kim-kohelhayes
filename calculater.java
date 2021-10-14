@@ -12,7 +12,7 @@ public class calculater {
     System.out.println(g);
     int h = remainder(a,b);
     System.out.println(h);
-    String dayOfTheWeek1 = "Tuesday";
+    String dayOfTheWeek1 = "Wednesday";
     String day = weekday(dayOfTheWeek1);
     countdown(5);
     greeting("Kevuda");
@@ -55,12 +55,14 @@ public class calculater {
     return day;
   }
   public static void countdown(int i) { 
+    if(i<0){
+      System.out.println("input must be positive or 0");
+    } 
     while(i>0){
-      System.out.println("Learning Java is fun!");
+      System.out.println("Learning Java is fun! " + i);
       i--;
     }
   }
-
   public static void greeting(String name) { 
     System.out.println("Hello " + name);
   }
