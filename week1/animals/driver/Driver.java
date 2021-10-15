@@ -10,7 +10,7 @@ public class Driver{
 
     Dog daFreise = new Dog("Da Freise", "Bichone Frise", 2, true, "White");
 
-    System.out.println(freckles.name);
-    System.out.println(daFreise.name);
+    System.out.println(freckles.name + "  is a " + freckles.age + " year old " + freckles.color + " " + freckles.breed + ".");
+    System.out.println(daFreise.name + "  is a " + daFreise.age + " year old " + daFreise.color + " " + daFreise.breed + ".");
   }
 }
