@@ -1,0 +1,15 @@
+Go line by line, and explain what's happening in each line.
+
+int score = 80; // A variable of type int and of name score is declared and is assigned a value of 80;
+
+String result; // A variable of type string is declared, named "result"
+
+if (score == 80) {  //  Comparing the variable "score" to the int 80. If "score" is 80 then the comparison is true, otherwise it's false
+	result = "You passed!";  // if the comparison is 'true' the variable "result" is assigned the string "You passed!"
+} else if (score > 80) { // Comparing the variable "score" to see if it is greater than the int 80, so 81 or higher is true, 80 is covered by the previous statement, and lower is false
+	result = "You did great!"; // if the comparison is 'true' then "result" is assigned the string "You did great!"
+} else {  // All other values not mentioned above (i.e. 79 and less) will result in this branch
+	result = "You did not pass. Try again!"; // "result is assigned the string "You did not pass. Try again!"
+}
+
+System.out.println(result); "You passed!" will print because 80 was assigned to score at the top of the program.

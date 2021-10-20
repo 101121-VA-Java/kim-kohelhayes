@@ -31,8 +31,8 @@ public class StringDriver {
 		Object a = new Object();
 		Object b = new Object();
 		
-		System.out.println("Is object a == b? " + (a == b)); //false
-		System.out.println("Is object a .equals b? " + a.equals(b)); //false
+		System.out.println("Is object a == b? " + (a == b));
+		System.out.println("Is object a .equals b? " + a.equals(b));
 		
 		/*
 		 * String methods to be play around with:
@@ -51,13 +51,7 @@ public class StringDriver {
 		
 		StringDriver sd = new StringDriver();
 		
-		System.out.println(sd.removeEveryOtherLetter("Hello World!"));{
-			
-		}
-		
-		
-		
-		
+		System.out.println(sd.removeEveryOtherLetter("Hello World!"));
 	}
 	
 	/*
@@ -68,7 +62,7 @@ public class StringDriver {
 	public String removeEveryOtherLetter(String s) {
 		StringBuilder str = new StringBuilder();
 		for(int i = 0; i < s.length(); i+=2) {
-			str.append(s.charAt(i));
+				str.append(s.charAt(i));
 		}
 		return str.toString();
 	}
