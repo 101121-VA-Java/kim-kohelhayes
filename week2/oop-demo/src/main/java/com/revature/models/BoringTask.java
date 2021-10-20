@@ -15,7 +15,7 @@ public class BoringTask extends Tasks{
 		// TODO Auto-generated constructor stub
 	}
 
-	public void stress() {
+	public void procrastination() {
 		/*
 		 * Because dueDate is a private field in Task, it is not visible/accessible via the child class
 		 * in order to access we could make the field not private or use setters/getters
