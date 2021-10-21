@@ -1,29 +1,34 @@
 public static void main(String[] args) {  
 
-	/*
-*					declaration class public = visible to other
-*					 classes, static = same value across all instances of the class, 
-*						void = no return type, main = the entry point of any java program.  
-*						String[] args = args contains the supplied command-line arguments 
-*						as an array of String objects.
-*/
+/*
+ *					declaration class public = visible to other
+ *					 classes, static = same value across all instances of the class, 
+ *						void = no return type, main = the entry point of any java program.  
+ *						String[] args = args contains the supplied command-line arguments 
+ *						as an array of String objects.
+ */
 
 	String[] foodTypes = getFoodTypes(); 
 	/*				
 	*					 an array of type String declaring it named foodTypes and 
 	*						using a getter of getFoodTypes() to provide the assignment.
+	*					more specifically, foodTypes = getFoodTypes() the method.
+	*					or calls the method getFoodTypes()
 	*/
 
 	String myType = foodTypes[2]; 
 	/*
 	*		creating a reference variable of type String declared
-	*		myType assigned to the empty array foodTypes of length 2
-	 */
+	*		myType assigned to the location in array foodTypes spot 2
+	*		more specifically, myType = foodTypes[2] = "dinner"
+	*/
 
 	String[] foodsOfMyType = getFoodsByType(myType); 
 	/*
-	*			type String array declared foodsOfMyType assigned to getFoodsByType 
+	*			type String array declared foodsOfMyType calls the method getFoodsByType() 
 	*			using the parameter myType
+	*			more specifically, foodsOfMyType = getFoodsByType("dinner")
+	*			foodsOfMyType = ["curry", "stir fry", "burger"]
 	*/
 	
 	for (String food : foodsOfMyType) { 
@@ -34,11 +39,17 @@ public static void main(String[] args) {
 /*
 *			enhanced for loop:  for each String food in the array foodsOfMyType
 *			print a line in the console with the food from the array in foodsOfMyType
+*			more specifically, the following will print:
+*			curry
+*			stir fry
+*			burger
 */
 
 
 public static String[] getFoodTypes() { // method getFoodTypes with no parameters
+
 	String[] foodTypes = {"breakfast","lunch","dinner","dessert","snack"}; 
+
 	//		 String array declared to be foodTypes assigned to the following values:
 	// 			"breakfast","lunch","dinner","dessert","snack"
 
