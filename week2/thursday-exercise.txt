@@ -1,11 +1,12 @@
 public static void main(String[] args) {  
 
 /*
- *					declaration class public = visible to other
- *					 classes, static = same value across all instances of the class, 
- *						void = no return type, main = the entry point of any java program.  
- *						String[] args = args contains the supplied command-line arguments 
- *						as an array of String objects.
+ *					this is main method declaration,
+ *					declaration class public = visible to other classes, 
+ *					static = same value across all instances of the class, 
+ *					void = no return type, main = the entry point of any java program.  
+ *					String[] args = args contains the supplied command-line arguments 
+ *					as an array of String objects.
  */
 
 	String[] foodTypes = getFoodTypes(); 
@@ -64,7 +65,7 @@ public static String[] getFoodsByType(String type) {
 	*/
 
 	String[] foods = new String[3];
-	//		String array declared foods assigned empty array of length 3
+	//		String array declared foods assigned with null values in an array of length 3
 
 	switch(type) {  // notice the parameter that was fed into the method is used here
 	case "breakfast":  // if it is breakfast this is the array:
