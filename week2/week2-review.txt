@@ -1,8 +1,52 @@
 # Questions
 ## Java Basics
 1.	What is Java? / Explain some features of Java
+	- Java is a mature language
+		- lot of documentation 
+		- supported/ backed by Oracle
+	- Highlevel programming language
+	- OOP language
+		- also supports other programming paradigms 
+			- OOP
+			- functional
+	- Compiled language
+		- provides compile time error checking
+	- Strictly typed language
+		- variable needs to declared with a type
+	- WORA/ Platform independence
+		- via the JVM
+	- Multithreaded language
+	- Automatic memory management
+		- Garbage collector
 2.	What is JRE / JDK / JVM?
+	- Java Development Kit
+		- Contains the JVM and the JRE
+		- Contains the compiler (javac) and other tools for development
+		- Provide an environment to develop and execute a Java program
+	- Java Runtime Environment
+		- Includes core libraries of Java
+		- Includes the JVM
+		- ALL THAT'S NEEDED TO RUN an application
+	- Java Virtual Machine
+		- takes the compiled code and executes it starting from the main method
+	- Compilation process in Java
+		- Highlevel Java code (.java) => Compilation Step (javac) => Bytecode (intermediary language) (.class) 
+		- then interpreted by the JVM
 3.	What is the difference between an object and a class?
+
+	Object
+		-	Created through new keyword
+		-	Created many times as per requirement
+		-	Allocates memory when it's created
+
+	Class
+		-	Declared using class keyword
+		-	Only Declared Once
+		-	Doesn't allocate memory when it's created
+		- Blueprint for object, defines states and behaviors
+			- states refer to field, properties
+			- behaviors refer to methods
+			
 4.	What is the root class from which every class extends?
 5.	What are the primitive data types in Java?
 6.	Where are Strings stored?
