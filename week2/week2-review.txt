@@ -48,12 +48,58 @@
 			- behaviors refer to methods
 			
 4.	What is the root class from which every class extends?
+	- Object class
+		- Parent of all classes
+			- contains methods such:
+				- toString() - override to return a String representation of an object
+				- equals(...) - override to actually compare the fields of the instances
+
 5.	What are the primitive data types in Java?
+		- boolean
+			- true/false: size is jvm dependent
+		- character
+			- 'A': 2bytes
+		- Whole numbers
+			- byte: 1byte
+			- short: 2bytes
+			- int: 4bytes // default
+			- long: 8 bytes
+		- Floating points, accomodate for decimals
+			- float: 4 bytes
+			- double: 8 bytes // default
+
 6.	Where are Strings stored?
+	- Strings are usually stored in the String pool (in the heap)
+		- where all strings instantiated literally (ie: String s = "Hello";) are stored
+		- this allows Java to reuse the save String for repeated valued strings
+	- String newS = new String("Hello"); //Creates the string in the heap itself instead of in the String Pool
+	- String s = "Hello"; //Creates the string in the String Pool, can be reused
+	- interning
+		- .intern() method - checks if a String is already in the String Pool and if it exists returns a reference to it,
+			else creates that string and returns that reference
+
 7.	Explain stack vs heap
+	-	Java Heap Space is used throughout the application, but Stack is only used for the method — 
+			or methods — currently running.
+	-	The Heap Space contains all objects are created, but Stack contains any reference to those objects.
+	-	Objects stored in the Heap can be accessed throughout the application. Primitive local variables 
+			are only accessed the Stack Memory blocks that contain their methods.
+	-	Memory allocation in the Heap Space is accessed through a complex, young-generation, old-generation 
+			system. Stack is accessed through a last-in, first-out (LIFO) memory allocation system.
+	-	Heap Space exists as long as the application runs and is larger than Stack, which is temporary, but faster.
+
 	1.	Are variable references stored on the stack or heap? What about the objects they refer to?
+		-	variables are stored in the stack, objects are stored in the heap.
+
 8.	What are annotations?
-9.	Why are strings immutable in java? How would you make your own objects immutable?
+	-	Annotations, a form of metadata, provide data about a program that is not part of the program itself. 
+			Annotations have no direct effect on the operation of the code they annotate.
+
+9a.	Why are strings immutable in java? 
+	-	The key benefits of keeping this class as immutable are caching, security, synchronization, and performance.
+
+9b.	How would you make your own objects immutable?
+
 10.	What is the difference between String, StringBuilder, and StringBuffer?
 11.	What are the different variable scopes in Java?
 12.	What are the access modifiers in Java? Explain them.
