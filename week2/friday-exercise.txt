@@ -19,6 +19,6 @@ public class Main {  // main class type public
 		Food myFood = new Food("potato", "vegetable");  //  type Food named myFood = a new object Food named potato type vegetable, to be used in line 5 method
 		myFood.cook();  // calling method cook from line 10 on myFood
 
-		System.out.println(myFood.name);  // print the name "potato" of myFood in the console
+		System.out.println(myFood.name);  // print the name of myFood in the console = cooked potato
 	}
 }
