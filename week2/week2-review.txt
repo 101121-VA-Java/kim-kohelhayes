@@ -119,6 +119,10 @@
 
 ## OOP
 1.	What are the 4 pillars of OOP? Explain each and give examples of you implement them in Java code
+	-	Abstraction
+	-	Polymorphism
+	-	Inheritance
+	-	Encapsulation	
 2.	What is the difference between an abstract class and an interface?
 3.	Can abstract methods have concrete methods? Can concrete (non-abstract) classes have abstract methods?
 4.	Can static methods access instance variables? Can non-static methods access static variables?

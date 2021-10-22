@@ -1,0 +1,24 @@
+public class Food { //declaring a public class named Food
+	public String name;  //declaring a public String named name
+	public String type;  //declaring a public String named type
+
+	public Food(String name, String type) { //instantiating a public Food with the parameters String name and String type
+		this.name = name; //instance of name = name
+		this.type = type; //instance of type = type
+	}
+
+	public void cook() {  // public method with no return named cook
+		if (!name.contains("cooked")) { // if name does not contain cooked
+			name = "cooked " + name;  // name = cooked concatonated with name
+		}
+	}
+}
+
+public class Main {  // main class type public
+	public static void main(String[] args) {  //  main method, type public, static, no return, with args contains the supplied command-line arguments
+		Food myFood = new Food("potato", "vegetable");  //  type Food named myFood = a new object Food named potato type vegetable, to be used in line 5 method
+		myFood.cook();  // calling method cook from line 10 on myFood
+
+		System.out.println(myFood.name);  // print the name "potato" of myFood in the console
+	}
+}
