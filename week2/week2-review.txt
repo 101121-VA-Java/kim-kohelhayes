@@ -99,22 +99,122 @@
 	-	The key benefits of keeping this class as immutable are caching, security, synchronization, and performance.
 
 9b.	How would you make your own objects immutable?
+	-	Don't add any setter method
+	-	Declare all fields final and private
+	-	If a field is a mutable object create defensive copies of it for getter methods
+	-	If a mutable object passed to the constructor must be assigned to a field create a defensive copy of it
+	-	Don't allow subclasses to override methods
 
 10.	What is the difference between String, StringBuilder, and StringBuffer?
+	-	Objects of String are immutable, and objects of StringBuffer and StringBuilder are mutable
+	-	StringBuffer and StringBuilder are similar, but StringBuilder is faster and preferred over StringBuffer for the single-threaded program. If thread safety is needed, then StringBuffer is used
+
 11.	What are the different variable scopes in Java?
+	-	Member Variables (Class Level Scope)
+		-	These variables must be declared inside class (outside any function). They can be directly accessed anywhere in class.
+	-	Local Variables (Method Level Scope)
+		-	Variables declared inside a method have method level scope and can’t be accessed outside the method. 
+		-	Note : Local variables don’t exist after method’s execution is over.
+	-	Loop Variables (Block Scope)
+		-	A variable declared inside pair of brackets “{” and “}” in a method has scope within the brackets only.
+	- instance/object scope
+		- variable lives throughout the lifetime of an object
+			- begins when the object is instantiated up to the point the object is garbage collected	
+
 12.	What are the access modifiers in Java? Explain them.
+	-	Private: 
+		-	We can access the private modifier only within the same class and not from outside the class.
+	-	Default: 
+		-	We can access the default modifier only within the same package and not from outside the package. And also, if we do not specify any access modifier it will automatically consider it as default.
+	-	Protected: 
+		-	We can access the protected modifier within the same package and also from outside the package with the help of the child class. If we do not make the child class, we cannot access it from outside the package. So inheritance is a must for accessing it from outside the package.
+	-	Public: 
+		-	We can access the public modifier from anywhere. We can access public modifiers from within the class as well as from outside the class and also within the package and from outside the package.
+
 13.	What are the non-access modifiers in Java?
+	-	static
+		-	for creating class methods and variables
+	-	final
+		-	for finalizing the implementations of classes, methods, and variables
+	-	abstract
+		-	for creating abstract classes and methods
+	-	synchronized and volatile 
+		-	used for threads
+
 14.	What is the difference between static and final variables?
+	-	static is used to define the class member that can be used independently of any object of the class 
+	-	final is used to declare a constant variable or a method that cannot be overridden or a class that cannot be inherited
+
 15.	What are the default values for all data types in Java?
+	-	boolean -- false
+	-	char 	--	'\u0000'
+	-	byte	--	0
+	-	short	--	0
+	-	int	--	0
+	-	long	--	0L
+	-	float	--	0.0f
+	-	double	--	0.0
+
 16.	What makes a class immutable?
+	-	Immutable class in java means that once an object is created, we cannot change its content. In Java, all the wrapper classes (like Integer, Boolean, Byte, Short) and String class is immutable. 
+	-	The requirements for creating an immutable class are:
+		-	The class must be declared as final so that child classes can’t be created.
+		-	Data members in the class must be declared private so that direct access is not allowed.
+		-	Data members in the class must be declared as final so that we can’t change the value of it after object creation.
+		-	A parameterized constructor should initialize all the fields performing a deep copy so that data members can’t be modified with an object reference.
+		-	Deep Copy of objects should be performed in the getter methods to return a copy rather than returning the actual object reference)
+
 17.	What data types are supported in switch statements?
+	-	A switch works with the byte , short , char , and int primitive data types. It also works with enumerated types (discussed in Enum Types), the String class, and a few special classes that wrap certain primitive types: Character , Byte , Short , and Integer (discussed in Numbers and Strings).
+
 18.	How to pass multiple values with a single parameter into a method?
+	-	var args
+		methodName(String... args)
+
 19.	What methods are available in the Object class?
+	-	public final Class getClass()	
+		-	returns the Class class object of this object. The Class class can further be used to get the metadata of this class.
+	-	public int hashCode()	
+		-	returns the hashcode number for this object.
+	-	public boolean equals(Object obj)	
+		-	compares the given object to this object.
+	-	protected Object clone() throws CloneNotSupportedException	
+		-	creates and returns the exact copy (clone) of this object.
+	-	public String toString()	
+		-	returns the string representation of this object.
+	-	public final void notify()	
+		-	wakes up single thread, waiting on this object's monitor.
+	-	public final void notifyAll()	
+		-	wakes up all the threads, waiting on this object's monitor.
+	-	public final void wait(long timeout)throws InterruptedException	
+		-	causes the current thread to wait for the specified milliseconds, until another thread notifies (invokes notify() or notifyAll() method).
+	-	public final void wait(long timeout,int nanos)throws InterruptedException	
+		-	causes the current thread to wait for the specified milliseconds and nanoseconds, until another thread notifies (invokes notify() or notifyAll() method).
+	-	public final void wait()throws InterruptedException	
+		-	causes the current thread to wait, until another thread notifies (invokes notify() or notifyAll() method).
+	-	protected void finalize()throws Throwable	
+		-	is invoked by the garbage collector before object is being garbage collected.
+
 20.	What is the difference between == and .equals()?
+	-	== checks if both objects point to the same memory location
+	-	.equals() evaluates to the comparison of values in the objects
+	
 21.	What is an enhanced for loop?
+			for(dataType item : array){
+				...
+			}
+
 22.	What are the 3 usages of “super” keyword?
+	-	super variable refers immediate parent class instance.
+	-	super variable can invoke immediate parent class method.
+	-	super() acts as immediate parent class constructor and should be the first line in child class constructor.
+
 23.	What is the first line of any constructor?
+	-	The first line of a constructor must either be a call on another constructor in the same class (using this), or a call on the superclass constructor (using super). If the first line is neither of these, the compiler automatically inserts a call to the parameterless super class constructor.
+
 24.	How would you perform constructor chaining?
+	-	
+
 25.	What happens if you don’t define a constructor for a class? Can you still instantiate it?
 
 ## OOP
