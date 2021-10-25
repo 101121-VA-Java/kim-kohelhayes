@@ -12,10 +12,20 @@ public class ListServices {
       Item coconutFlakes = new Item("Coconut Flakes", LocalDate.parse("2021-11-01"), LocalDate.parse("2021-11-10"));
       Item sunflowerSeeds = new Item("Sunflower Seeds", LocalDate.parse("2021-11-01"), LocalDate.parse("2021-11-10"));
       
-      System.out.println(almondMilk.getItemName());
+
+      System.out.println(almondMilk.getItemName() + "  was added to the list on " + almondMilk.getAddedOn() + " and is due by " + almondMilk.getNeedByDate());
+      System.out.println(coconutFlakes.getItemName() + "  was added to the list on " + coconutFlakes.getAddedOn() + " and is due by " + coconutFlakes.getNeedByDate());
+      System.out.println(sunflowerSeeds.getItemName() + "  was added to the list on " + sunflowerSeeds.getAddedOn() + " and is due by " + sunflowerSeeds.getNeedByDate());
+    
       
       almondMilk.setItemName("almondmilk");
-      System.out.println(almondMilk.getItemName());
+      coconutFlakes.setItemName("Coconut");
+      sunflowerSeeds.setItemName("sunflowerSeeds");
+      
+      System.out.println(almondMilk.getItemName() + "  was added to the list on " + almondMilk.getAddedOn() + " and is due by " + almondMilk.getNeedByDate());
+      System.out.println(coconutFlakes.getItemName() + "  was added to the list on " + coconutFlakes.getAddedOn() + " and is due by " + coconutFlakes.getNeedByDate());
+      System.out.println(sunflowerSeeds.getItemName() + "  was added to the list on " + sunflowerSeeds.getAddedOn() + " and is due by " + sunflowerSeeds.getNeedByDate());
+
 	}
 		
 	public void doInheritance() {

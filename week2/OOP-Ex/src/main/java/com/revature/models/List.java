@@ -16,11 +16,9 @@ public class List {
 		
 	}
 	
-	public void polymorphismEx() {
+	public static void ListUser() {
 		
-		RecurringItem milk = new RecurringItem(("Milk", LocalDate.parse("2021-11-01"), LocalDate.parse("2021-11-10"));
-		
-		
+				
 		
 	}
 
