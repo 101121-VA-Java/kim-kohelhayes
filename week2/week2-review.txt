@@ -1,6 +1,8 @@
 # Questions
 ## Java Basics
+
 1.	What is Java? / Explain some features of Java
+
 	- Java is a mature language
 		- lot of documentation 
 		- supported/ backed by Oracle
@@ -18,7 +20,9 @@
 	- Multithreaded language
 	- Automatic memory management
 		- Garbage collector
+
 2.	What is JRE / JDK / JVM?
+
 	- Java Development Kit
 		- Contains the JVM and the JRE
 		- Contains the compiler (javac) and other tools for development
@@ -32,6 +36,7 @@
 	- Compilation process in Java
 		- Highlevel Java code (.java) => Compilation Step (javac) => Bytecode (intermediary language) (.class) 
 		- then interpreted by the JVM
+
 3.	What is the difference between an object and a class?
 
 	Object
@@ -48,6 +53,7 @@
 			- behaviors refer to methods
 			
 4.	What is the root class from which every class extends?
+
 	- Object class
 		- Parent of all classes
 			- contains methods such:
@@ -55,6 +61,7 @@
 				- equals(...) - override to actually compare the fields of the instances
 
 5.	What are the primitive data types in Java?
+
 		- boolean
 			- true/false: size is jvm dependent
 		- character
@@ -69,6 +76,7 @@
 			- double: 8 bytes // default
 
 6.	Where are Strings stored?
+
 	- Strings are usually stored in the String pool (in the heap)
 		- where all strings instantiated literally (ie: String s = "Hello";) are stored
 		- this allows Java to reuse the save String for repeated valued strings
@@ -79,6 +87,7 @@
 			else creates that string and returns that reference
 
 7.	Explain stack vs heap
+
 	-	Java Heap Space is used throughout the application, but Stack is only used for the method — 
 			or methods — currently running.
 	-	The Heap Space contains all objects are created, but Stack contains any reference to those objects.
@@ -89,16 +98,20 @@
 	-	Heap Space exists as long as the application runs and is larger than Stack, which is temporary, but faster.
 
 	1.	Are variable references stored on the stack or heap? What about the objects they refer to?
+
 		-	variables are stored in the stack, objects are stored in the heap.
 
 8.	What are annotations?
+
 	-	Annotations, a form of metadata, provide data about a program that is not part of the program itself. 
-			Annotations have no direct effect on the operation of the code they annotate.
+			- Annotations have no direct effect on the operation of the code they annotate.
 
 9a.	Why are strings immutable in java? 
+
 	-	The key benefits of keeping this class as immutable are caching, security, synchronization, and performance.
 
 9b.	How would you make your own objects immutable?
+
 	-	Don't add any setter method
 	-	Declare all fields final and private
 	-	If a field is a mutable object create defensive copies of it for getter methods
@@ -106,10 +119,12 @@
 	-	Don't allow subclasses to override methods
 
 10.	What is the difference between String, StringBuilder, and StringBuffer?
+
 	-	Objects of String are immutable, and objects of StringBuffer and StringBuilder are mutable
 	-	StringBuffer and StringBuilder are similar, but StringBuilder is faster and preferred over StringBuffer for the single-threaded program. If thread safety is needed, then StringBuffer is used
 
 11.	What are the different variable scopes in Java?
+
 	-	Member Variables (Class Level Scope)
 		-	These variables must be declared inside class (outside any function). They can be directly accessed anywhere in class.
 	-	Local Variables (Method Level Scope)
@@ -122,6 +137,7 @@
 			- begins when the object is instantiated up to the point the object is garbage collected	
 
 12.	What are the access modifiers in Java? Explain them.
+
 	-	Private: 
 		-	We can access the private modifier only within the same class and not from outside the class.
 	-	Default: 
@@ -132,6 +148,7 @@
 		-	We can access the public modifier from anywhere. We can access public modifiers from within the class as well as from outside the class and also within the package and from outside the package.
 
 13.	What are the non-access modifiers in Java?
+
 	-	static
 		-	for creating class methods and variables
 	-	final
@@ -142,20 +159,25 @@
 		-	used for threads
 
 14.	What is the difference between static and final variables?
+
 	-	static is used to define the class member that can be used independently of any object of the class 
 	-	final is used to declare a constant variable or a method that cannot be overridden or a class that cannot be inherited
 
 15.	What are the default values for all data types in Java?
+	bitter black coffee sure is for long days
+	11223344
+
 	-	boolean -- false
-	-	char 	--	'\u0000'
 	-	byte	--	0
+	-	char 	--	'\u0000'
 	-	short	--	0
 	-	int	--	0
-	-	long	--	0L
 	-	float	--	0.0f
+	-	long	--	0L
 	-	double	--	0.0
 
 16.	What makes a class immutable?
+
 	-	Immutable class in java means that once an object is created, we cannot change its content. In Java, all the wrapper classes (like Integer, Boolean, Byte, Short) and String class is immutable. 
 	-	The requirements for creating an immutable class are:
 		-	The class must be declared as final so that child classes can’t be created.
@@ -165,13 +187,16 @@
 		-	Deep Copy of objects should be performed in the getter methods to return a copy rather than returning the actual object reference)
 
 17.	What data types are supported in switch statements?
+
 	-	A switch works with the byte , short , char , and int primitive data types. It also works with enumerated types (discussed in Enum Types), the String class, and a few special classes that wrap certain primitive types: Character , Byte , Short , and Integer (discussed in Numbers and Strings).
 
 18.	How to pass multiple values with a single parameter into a method?
+
 	-	var args
 		methodName(String... args)
 
 19.	What methods are available in the Object class?
+
 	-	public final Class getClass()	
 		-	returns the Class class object of this object. The Class class can further be used to get the metadata of this class.
 	-	public int hashCode()	
@@ -196,38 +221,88 @@
 		-	is invoked by the garbage collector before object is being garbage collected.
 
 20.	What is the difference between == and .equals()?
+
 	-	== checks if both objects point to the same memory location
 	-	.equals() evaluates to the comparison of values in the objects
 	
 21.	What is an enhanced for loop?
+
 			for(dataType item : array){
 				...
 			}
 
 22.	What are the 3 usages of “super” keyword?
+
 	-	super variable refers immediate parent class instance.
 	-	super variable can invoke immediate parent class method.
 	-	super() acts as immediate parent class constructor and should be the first line in child class constructor.
 
 23.	What is the first line of any constructor?
+
 	-	The first line of a constructor must either be a call on another constructor in the same class (using this), or a call on the superclass constructor (using super). If the first line is neither of these, the compiler automatically inserts a call to the parameterless super class constructor.
 
 24.	How would you perform constructor chaining?
-	-	
+
+	-	Within same class: It can be done using this() keyword for constructors in same class.
+	-	From base class: by using super() keyword to call constructor from the base class.
 
 25.	What happens if you don’t define a constructor for a class? Can you still instantiate it?
 
+	-	If we don't define a constructor in a class, then the compiler creates default constructor(with no arguments) for the class. And if we write a constructor with arguments or no-arguments then the compiler does not create a default constructor.
+	-	
+
 ## OOP
 1.	What are the 4 pillars of OOP? Explain each and give examples of you implement them in Java code
+
 	-	Abstraction
+		-	Abstraction means using simple things to represent complexity. We all know how to turn the TV on, but we don’t need to know how it works in order to enjoy it. In Java, abstraction means simple things like objects, classes, and variables represent more complex underlying code and data. This is important because it lets avoid repeating the same work multiple times.
 	-	Polymorphism
+		-	This Java OOP concept lets programmers use the same word to mean different things in different contexts. One form of polymorphism in Java is method overloading. That’s when different meanings are implied by the code itself. The other form is method overriding. That’s when the different meanings are implied by the values of the supplied variables.
 	-	Inheritance
+		-	This is a special feature of Object Oriented Programming in Java. It lets programmers create new classes that share some of the attributes of existing classes. This lets us build on previous work without reinventing the wheel.
 	-	Encapsulation	
+		-	This is the practice of keeping fields within a class private, then providing access to them via public methods. It’s a protective barrier that keeps the data and code safe within the class itself. This way, we can re-use objects like code components or variables without allowing open access to the data system-wide.
+
 2.	What is the difference between an abstract class and an interface?
-3.	Can abstract methods have concrete methods? Can concrete (non-abstract) classes have abstract methods?
-4.	Can static methods access instance variables? Can non-static methods access static variables?
-5.	What are the implicit modifiers for interface variables? methods?
-6.	What is the difference between method overloading and overriding? What are the rules for changing the method signature of overloaded methods?
+
+	-	Type of methods: 
+		-	Interface can have only abstract methods. 
+		-	An abstract class can have abstract and non-abstract methods. From Java 8, it can have default and static methods also.
+	-	Final Variables: 
+		-	Variables declared in a Java interface are by default final. 
+		-	An abstract class may contain non-final variables.
+	-	Type of variables: 
+		-	The interface has only static and final variables.
+		-	Abstract class can have final, non-final, static and non-static variables. 
+	-	Implementation:
+		-	Interface can’t provide the implementation of an abstract class.
+		-	Abstract class can provide the implementation of the interface.
+	-	Inheritance vs Abstraction:
+		-	A Java interface can be implemented using the keyword “implements”
+		-	Abstract class can be extended using the keyword “extends”.
+	-	Multiple implementations:
+		-	An interface can extend another Java interface only. 
+		-	An abstract class can extend another Java class and implement multiple Java interfaces.
+	-	Accessibility of Data Members:
+		-	Members of a Java interface are public by default. 
+		-	A Java abstract class can have class members like private, protected, etc.
+
+3a.	Can abstract methods have concrete methods? 
+
+3b.	Can concrete (non-abstract) classes have abstract methods?
+
+4a.	Can static methods access instance variables?
+
+4b.	Can non-static methods access static variables?
+
+5a.	What are the implicit modifiers for interface variables?
+
+5b.	What are the implicit modifiers for interface methods?
+
+6a.	What is the difference between method overloading and overriding?
+
+6b.	What are the rules for changing the method signature of overloaded methods?
+
 7.	What are covariant return types? What rules apply to return types for overridden methods?
 8.	When do you use extends or implements keywords?
 
@@ -249,10 +324,52 @@
 
 ## Maven
 1.	What is Maven?
+	Simple project setup that follows best practices
+Consistent usage across all projects
+Easy way to build projects in which unnecessary details are hidden
+Uniform build system, where a standard strategy is followed
+Dependency management including automatic updating
+Quality project information, such as dependency lists, cross referenced sources and unit test reports
+Dependency management, including automatic updating and dependency closures
+The ability to handle multiple projects simultaneously
+Dynamic downloading of necessary Java libraries and plug-ins from Maven repositories
+Model-based builds − Maven is able to build any number of projects into predefined output types such as jar, war, metadata
+Coherent site of project information − Using the same metadata as per the build process, maven is able to generate a website and a PDF including complete documentation
+Backward Compatibility – You can easily port the multiple modules of a project into Maven 3 from older versions of Maven. It can support the older versions also
+Parallel builds − It analyses the project dependency graph and enables you to build schedule modules in parallel. Using this, you can achieve the performance improvements of 20-50%.
 2.	What is the default Maven build lifecycle?
 3.	Where / when does Maven retrieve dependencies from? Where are they stored locally?
 4.	What is the POM and what is the pom.xml?
 5.	What defines Maven project coordinates?
 
+## Git
+- What is version control?
+- What is the difference between git and GitHub?
+- List the git commands you know and what they do
+- How would you prevent a file from being tracked by git?
+- What is a branch? What are some common branching strategies?
+- What is a merge conflict? How do you prevent these and resolve if it happens?
+- What is a GitHub pull request?
+- What is the git workflow for editing code and saving changes?
+- What is a commit?
+- How would you go back in your commit history if you make a mistake?
+- What is a Github issue?
+
+## Unix
+- Where are the root and home directories located? How to get to each?
+- What Linux command would you use to:
+	- Navigate your file hierarchy on the command line?
+	- List files? What about hidden files?
+	- Edit a file from the terminal
+- What is a package manager? What are some common Linux package managers?
+
+## AWS
+- How would you describe AWS? What is “the cloud” or “cloud computing” and why is it so popular now?
+- What’s the difference between a Region and an Availability Zone (AZ)?
+- How are you charged for using AWS services?
+- Explain the following AWS services:
+	- EC2
+	- EBS
+	- AMI
 
 

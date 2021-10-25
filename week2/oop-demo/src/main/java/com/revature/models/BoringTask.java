@@ -2,8 +2,10 @@ package com.revature.models;
 
 import java.time.LocalDate;
 
-public class BoringTask extends Tasks{
+import com.revature.interfaces.Doable;
+import com.revature.interfaces.Issuable;
 
+public class BoringTask extends Task implements Doable{
 	
 	public BoringTask() {
 		super();
@@ -15,13 +17,37 @@ public class BoringTask extends Tasks{
 		// TODO Auto-generated constructor stub
 	}
 
-	public void procrastination() {
-		/*
-		 * Because dueDate is a private field in Task, it is not visible/accessible via the child class
-		 * in order to access we could make the field not private or use setters/getters
-		 */
+	public void procrastinate() {
 		this.setDueDate(this.getDueDate().plusDays(1));
 	}
+	
+	public void procrastinate(int days) {
+		this.setDueDate(this.getDueDate().plusDays(days));
+	}
+	
+	public void procrastinate(int days, int times) {
+		this.setDueDate(this.getDueDate().plusDays(days * times));
+	}
 
+	@Override
+	public String toString() {
+		return "Overriden toStringMethod!";
+	}
 
+	@Override
+	public void doTask() {
+		System.out.println("I'm doing " + this.getName() + " boringly");
+		
+	}
+
+	@Override
+	public void doSomething() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+//	@Override
+//	public BoringTask getATask() {
+//		return new BoringTask();
+//	}
 }

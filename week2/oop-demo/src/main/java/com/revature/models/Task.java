@@ -2,12 +2,12 @@ package com.revature.models;
 
 import java.time.LocalDate;
 
-public class Tasks {
+public abstract class Task {
 	
 	private String name;
 	private LocalDate dueDate;
 	
-	public Tasks() {
+	public Task() {
 		super();
 /*
  * 		super.toString(); // in this case, super refers to the parent (Object class) 
@@ -17,7 +17,7 @@ public class Tasks {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Tasks(String name, LocalDate dueDate) {
+	public Task(String name, LocalDate dueDate) {
 		super();
 		this.name = name;
 		this.dueDate = dueDate;
@@ -40,7 +40,7 @@ public class Tasks {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Tasks other = (Tasks) obj;
+		Task other = (Task) obj;
 		if (dueDate == null) {
 			if (other.dueDate != null)
 				return false;
@@ -74,4 +74,17 @@ public class Tasks {
 	public String toString() {
 		return "Task [name=" + name + ", dueDate=" + dueDate + "]";
 	}
+	
+	// because abstract, can no longer create instance of Task
+//	public Task getATask() {
+//		return new Task();
+//	}
+	/*
+	 * public class Object{
+	 * 	public String toString(){
+	 * 		return //memory address; 
+	 * }
+	 */
+	
+	public abstract void doTask();
 }
