@@ -10,34 +10,34 @@ public class ListServices {
 
 		
 	public void doEncapsulation() {
-      Item almondMilk = new Item("Almond Milk", LocalDate.parse("2021-11-01"), LocalDate.parse("2021-11-10"));
-      Item coconutFlakes = new Item("Coconut Flakes", LocalDate.parse("2021-11-01"), LocalDate.parse("2021-11-10"));
-      Item sunflowerSeeds = new Item("Sunflower Seeds", LocalDate.parse("2021-11-01"), LocalDate.parse("2021-11-10"));
-      
-
-      System.out.println(almondMilk.getItemName() + "  was added to the list on " + almondMilk.getAddedOn() + " and is due by " + almondMilk.getNeedByDate());
-      System.out.println(coconutFlakes.getItemName() + "  was added to the list on " + coconutFlakes.getAddedOn() + " and is due by " + coconutFlakes.getNeedByDate());
-      System.out.println(sunflowerSeeds.getItemName() + "  was added to the list on " + sunflowerSeeds.getAddedOn() + " and is due by " + sunflowerSeeds.getNeedByDate());
-    
-      
-      almondMilk.setItemName("almondmilk");
-      coconutFlakes.setItemName("Coconut");
-      sunflowerSeeds.setItemName("sunflowerSeeds");
-      
-      System.out.println(almondMilk.getItemName() + "  was added to the list on " + almondMilk.getAddedOn() + " and is due by " + almondMilk.getNeedByDate());
-      System.out.println(coconutFlakes.getItemName() + "  was added to the list on " + coconutFlakes.getAddedOn() + " and is due by " + coconutFlakes.getNeedByDate());
-      System.out.println(sunflowerSeeds.getItemName() + "  was added to the list on " + sunflowerSeeds.getAddedOn() + " and is due by " + sunflowerSeeds.getNeedByDate());
+//      Item almondMilk = new Item("Almond Milk", LocalDate.parse("2021-11-01"), LocalDate.parse("2021-11-10"));
+//      Item coconutFlakes = new Item("Coconut Flakes", LocalDate.parse("2021-11-01"), LocalDate.parse("2021-11-10"));
+//      Item sunflowerSeeds = new Item("Sunflower Seeds", LocalDate.parse("2021-11-01"), LocalDate.parse("2021-11-10"));
+//      
+//
+//      System.out.println(almondMilk.getItemName() + "  was added to the list on " + almondMilk.getAddedOn() + " and is due by " + almondMilk.getNeedByDate());
+//      System.out.println(coconutFlakes.getItemName() + "  was added to the list on " + coconutFlakes.getAddedOn() + " and is due by " + coconutFlakes.getNeedByDate());
+//      System.out.println(sunflowerSeeds.getItemName() + "  was added to the list on " + sunflowerSeeds.getAddedOn() + " and is due by " + sunflowerSeeds.getNeedByDate());
+//    
+//      
+//      almondMilk.setItemName("almondmilk");
+//      coconutFlakes.setItemName("Coconut");
+//      sunflowerSeeds.setItemName("sunflowerSeeds");
+//      
+//      System.out.println(almondMilk.getItemName() + "  was added to the list on " + almondMilk.getAddedOn() + " and is due by " + almondMilk.getNeedByDate());
+//      System.out.println(coconutFlakes.getItemName() + "  was added to the list on " + coconutFlakes.getAddedOn() + " and is due by " + coconutFlakes.getNeedByDate());
+//      System.out.println(sunflowerSeeds.getItemName() + "  was added to the list on " + sunflowerSeeds.getAddedOn() + " and is due by " + sunflowerSeeds.getNeedByDate());
 
 	}
 		
 	public void doInheritance() {
-	    Item almondMilk = new Item("Almond Milk", LocalDate.parse("2021-11-01"), LocalDate.parse("2021-11-10"));
-	    
-	    System.out.println(almondMilk.getItemName() + "  was added to the list on " + almondMilk.getAddedOn() + " and is due by " + almondMilk.getNeedByDate());
-		
-		RecurringItem ni = new RecurringItem("new item", LocalDate.parse("2021-11-01"), LocalDate.parse("2021-11-10"));
-		
-		System.out.println(ni.getItemName() + "  was added to the list on " + ni.getAddedOn() + " and is due by " + ni.getNeedByDate());
+//	    Item almondMilk = new Item("Almond Milk", LocalDate.parse("2021-11-01"), LocalDate.parse("2021-11-10"));
+//	    
+//	    System.out.println(almondMilk.getItemName() + "  was added to the list on " + almondMilk.getAddedOn() + " and is due by " + almondMilk.getNeedByDate());
+//		
+//		RecurringItem ni = new RecurringItem("new item", LocalDate.parse("2021-11-01"), LocalDate.parse("2021-11-10"));
+//		
+//		System.out.println(ni.getItemName() + "  was added to the list on " + ni.getAddedOn() + " and is due by " + ni.getNeedByDate());
 	}
 	
 	public void doPolymorphism() {
@@ -59,9 +59,9 @@ public class ListServices {
 	}
 	
 	public void doAbstraction() {
-		GroceryList gl = new GroceryList("Grocery List", "It's a grocery list");
-		
-		System.out.println(gl.toString());
+//		GroceryList gl = new GroceryList("Grocery List", "It's a grocery list");
+//		
+//		System.out.println(gl.toString());
 	}
 }
 

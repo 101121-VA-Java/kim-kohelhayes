@@ -11,14 +11,11 @@ public class ExceptionDriver {
 		int b = 0;
 		
 		
-		
-		
-		
 		try 
 		{
 			// put risky code here | code that can throw an exception
 			
-			divide(a,b);
+			ExceptionDriver.divideByB(a,b);
 			
 		} catch (AlmondMilkException e) 
 		{
@@ -36,8 +33,13 @@ public class ExceptionDriver {
 		
 	}
 	
-	public static int divide(int a, int b) throws AlmondMilkException {
-		return a / b;
+	public static int divideByB(int a, int b) throws AlmondMilkException {
+		if(b == 0 ) {
+			throw new AlmondMilkException();
+		}else {
+			
+			return a / b;
+		}
 	}
 	
 	
