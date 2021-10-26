@@ -1,9 +1,8 @@
 package com.revature.models;
-import com.revature.models.Item;
-import com.revature.models.RecurringItem;
-import java.time.*;
 
-public class List {
+import java.util.Objects;
+
+public abstract class List {
 	
 	private String listName;
 	private String listDescription;
@@ -15,12 +14,41 @@ public class List {
 		
 		
 	}
-	
-	public static void ListUser() {
-		
-				
-		
+
+	public String getListName() {
+		return listName;
 	}
+
+	public void setListName(String listName) {
+		this.listName = listName;
+	}
+
+	public String getListDescription() {
+		return listDescription;
+	}
+
+	public void setListDescription(String listDescription) {
+		this.listDescription = listDescription;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(listName);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		List other = (List) obj;
+		return Objects.equals(listName, other.listName);
+	}
+	
+	
 
 	
 	

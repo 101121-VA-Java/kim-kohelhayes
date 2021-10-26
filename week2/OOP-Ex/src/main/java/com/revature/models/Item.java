@@ -2,7 +2,9 @@ package com.revature.models;
 
 import java.time.LocalDate;
 
-public class Item 
+import com.revature.interfaces.Listable;
+
+public class Item implements Listable 
 {
 	
 	private String itemName;
@@ -17,8 +19,6 @@ public class Item
 		this.needByDate = needByDate;
 	}
 
-	
-	
 	
 
 	public String getItemName() {
@@ -45,10 +45,10 @@ public class Item
 		this.needByDate = needByDate;
 	}
 
-	public void addItemToList() {
-		
-	}
 	
+	public void makePlural() {
+		setItemName(getItemName()+"s");
+	}
 	
 
 	

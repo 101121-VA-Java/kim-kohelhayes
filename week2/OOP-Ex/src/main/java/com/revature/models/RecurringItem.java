@@ -11,19 +11,19 @@ public class RecurringItem extends Item {
 	}
 
 		
-	public void putsBackOnList(String name) {
+	public void putsBackOnList() {
 		//Puts the RecurringItem back on the list after it's needByDate has passed
 		this.setNeedByDate(getNeedByDate().plusDays(10));
 	}
 	
-	public void putsBackOnList(String name, int addDays) {
+	public void putsBackOnList(int addDays) {
 		//Puts the RecurringItem back on the list after it's needByDate has passed
-		this.setNeedByDate(getNeedByDate().plusDays(10));
+		this.setNeedByDate(getNeedByDate().plusDays(15));
 	}
 
 	@Override
-	public void addItemToList() {
-		
+	public void makePlural() {
+		setItemName(getItemName()+"ed");
 	}
 	
 }

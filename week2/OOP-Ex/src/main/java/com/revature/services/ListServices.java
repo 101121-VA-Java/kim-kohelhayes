@@ -2,7 +2,9 @@ package com.revature.services;
 
 import java.time.LocalDate;
 
+import com.revature.models.GroceryList;
 import com.revature.models.Item;
+import com.revature.models.RecurringItem;
 
 public class ListServices {
 
@@ -29,15 +31,37 @@ public class ListServices {
 	}
 		
 	public void doInheritance() {
+	    Item almondMilk = new Item("Almond Milk", LocalDate.parse("2021-11-01"), LocalDate.parse("2021-11-10"));
+	    
+	    System.out.println(almondMilk.getItemName() + "  was added to the list on " + almondMilk.getAddedOn() + " and is due by " + almondMilk.getNeedByDate());
 		
+		RecurringItem ni = new RecurringItem("new item", LocalDate.parse("2021-11-01"), LocalDate.parse("2021-11-10"));
+		
+		System.out.println(ni.getItemName() + "  was added to the list on " + ni.getAddedOn() + " and is due by " + ni.getNeedByDate());
 	}
 	
 	public void doPolymorphism() {
-	
+		Item almondMilk = new Item("Almond Milk", LocalDate.parse("2021-11-01"), LocalDate.parse("2021-11-10"));
+		RecurringItem ni = new RecurringItem("new item", LocalDate.parse("2021-11-01"), LocalDate.parse("2021-11-10"));
+		
+		ni.putsBackOnList();
+		System.out.println(ni.getItemName() + "  was added to the list on " + ni.getAddedOn() + " and is due by " + ni.getNeedByDate());
+		
+		ni.putsBackOnList(5);
+		System.out.println(ni.getItemName() + "  was added to the list on " + ni.getAddedOn() + " and is due by " + ni.getNeedByDate());
+		
+		
+		almondMilk.makePlural();
+		System.out.println(almondMilk.getItemName());
+		ni.makePlural();
+		System.out.println(ni.getItemName());
+		
 	}
 	
 	public void doAbstraction() {
+		GroceryList gl = new GroceryList("Grocery List", "It's a grocery list");
 		
+		System.out.println(gl.toString());
 	}
 }
 
