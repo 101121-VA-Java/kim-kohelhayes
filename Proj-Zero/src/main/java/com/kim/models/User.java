@@ -2,11 +2,11 @@ package com.kim.models;
 
 public class User {
 
-	private int id;
-	private String name;
-	private String email;
-	private String password;
-	
+	protected int id;
+	protected String name;
+	protected String email;
+	protected String password;
+
 	public User(int id, String name, String email, String password) {
 		super();
 		this.id = id;
@@ -91,8 +91,5 @@ public class User {
 			return false;
 		return true;
 	}
-	
-	
-	
 
 }

@@ -1,10 +1,10 @@
 package com.kim.models;
 
 public class Employee extends User {
-	
+
 	private boolean manager;
 	private String managerName;
-	
+
 	public Employee(int id, String name, String email, String password, boolean manager, String managerName) {
 		super(id, name, email, password);
 		this.manager = manager;
@@ -27,9 +27,11 @@ public class Employee extends User {
 		this.managerName = managerName;
 	}
 
+
 	@Override
 	public String toString() {
-		return "Employee [manager=" + manager + ", managerName=" + managerName + "]";
+		return "Employee [manager=" + manager + ", managerName=" + managerName + ", id=" + id + ", name=" + name
+				+ ", email=" + email + ", password=" + password + "]";
 	}
 
 	@Override
@@ -60,5 +62,4 @@ public class Employee extends User {
 		return true;
 	}
 
-		
 }
