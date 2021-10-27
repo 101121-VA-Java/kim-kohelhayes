@@ -14,11 +14,11 @@ import com.kim.repositories.EmployeeDAO;
 public class EmployeeDAOTest {
 
 
-	private EmployeeDAO ed;
+	private EmployeeDAO emp;
 	
 	@BeforeEach
 	public void setup() {
-		ed = new EmployeeArray();
+		emp = new EmployeeArray();
 		
 	}
 	
@@ -26,7 +26,7 @@ public class EmployeeDAOTest {
 	public void getAllEmployees(){
 		Employee[] expected = {	new Employee(0, "TheAdmin", "admin@123.com", "pass", true, "TheAdmin")}; 
 								
-		Employee[] actual = ed.getAllEmployees();
+		Employee[] actual = emp.getAllEmployees();
 		assertArrayEquals(expected, actual);
 	}
 	
@@ -36,10 +36,10 @@ public class EmployeeDAOTest {
 								new Employee(1, "Manager", "mngr@123.com", "pass", true, "TheAdmin") };
 		
 		// Adding an employee
-		ed.addEmployee(new Employee(1, "Manager", "mngr@123.com", "pass", true, "TheAdmin"));
+		emp.addEmployee(new Employee(1, "Manager", "mngr@123.com", "pass", true, "TheAdmin"));
 //				ed.addEmployee(new Employee(2, "Kim", "kim@123.com", "pass", false, "Manager"));
 		
-		assertArrayEquals(expected, ed.getAllEmployees());
+		assertArrayEquals(expected, emp.getAllEmployees());
 	}	
 	
 	
@@ -48,10 +48,19 @@ public class EmployeeDAOTest {
 		
 		Employee expected = new Employee(0, "TheAdmin", "admin@123.com", "pass", true, "TheAdmin");
 		
-		Employee actual = ed.getEmployeeById(0);
+		Employee actual = emp.getEmployeeById(0);
 		assertEquals(expected, actual);
 		
 	}
+	
+	@Test
+	public void addEmployee() {
+		
+		
+		
+	}
+	
+	
 	
 	
 	
