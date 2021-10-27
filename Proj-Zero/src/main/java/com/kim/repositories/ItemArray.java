@@ -2,7 +2,7 @@ package com.kim.repositories;
 
 import com.kim.models.Item;
 
-public class ItemArray implements ItemDAOAble {
+public class ItemArray implements ItemDAO {
 
 	@Override
 	public Item[] getAllItems() {

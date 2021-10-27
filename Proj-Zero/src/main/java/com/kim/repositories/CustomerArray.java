@@ -2,7 +2,7 @@ package com.kim.repositories;
 
 import com.kim.models.Customer;
 
-public class CustomerArray implements CustomerDAOAble {
+public class CustomerArray implements CustomerDAO {
 
 	@Override
 	public Customer[] getAllCustomers() {

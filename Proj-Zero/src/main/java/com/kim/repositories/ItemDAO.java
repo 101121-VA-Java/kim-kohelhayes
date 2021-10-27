@@ -2,7 +2,7 @@ package com.kim.repositories;
 
 import com.kim.models.Item;
 
-public interface ItemDAOAble {
+public interface ItemDAO {
 
 	Item[] getAllItems();
 

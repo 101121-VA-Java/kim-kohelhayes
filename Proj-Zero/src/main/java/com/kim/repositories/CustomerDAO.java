@@ -2,7 +2,7 @@ package com.kim.repositories;
 
 import com.kim.models.Customer;
 
-public interface CustomerDAOAble {
+public interface CustomerDAO {
 	Customer[] getAllCustomers(); // returns an array of all of the employees available
 
 	Customer getCustomerById(int custID);
