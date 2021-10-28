@@ -73,7 +73,25 @@ public class EmployeeArray implements EmployeeDAO {
 
 	@Override
 	public String deleteEmployeeById(int empID) {
-		// TODO Auto-generated method stub
+		
+		/*
+		 * delete existing employee record by taking in 
+		 * int id 
+		 * do a for loop to find the id
+		 * do a if statement
+		 * 
+		 * for(int i = 0; i< employees.length ; i++) {
+		 *	if(emp.getId() == employees[i].getId()) {
+		 * 
+		 * delete record from db
+		 * 
+		 * return boolean true for deleted
+		 * return boolean false for not deleted
+		 * 
+		 */
+		
+		
+
 		return null;
 	}
 

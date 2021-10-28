@@ -58,5 +58,14 @@ public class EmployeeDAOTest {
 		assertEquals(expected, actual);
 
 	}
+	
+	@Test
+	public void deleteEmployeeById() {
+		
+		int expected = 0;
+		
+		String actual = emp.deleteEmployeeById(expected);
+	}
+	
 
 }
