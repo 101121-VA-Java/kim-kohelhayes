@@ -5,14 +5,11 @@ import com.kim.models.Employee;
 public interface EmployeeDAO {
 	Employee[] getAllEmployees(); // returns an array of all of the employees available
 
-	Employee getEmployeeById(int empID);
+	Employee getEmployeeById(int empID); // returns Employee Object
 
 	int addEmployee(Employee emp); // returns assigned id
 
-	String editEmployeeById(int empID); // returns String of employee's information to look at
+	Employee editEmployeeByName(Employee emp); // returns Employee Object
 
-	String editEmployeeByName(Employee emp); // returns String of employee's information to look at
-
-	String deleteEmployeeById(int empID); // returns String "Successful" or "Unsuccessful" depending on operation
-											// success
+	String deleteEmployeeById(int empID); // returns String "Successful" or "Unsuccessful"
 }

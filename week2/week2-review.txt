@@ -167,7 +167,7 @@
 	bitter black coffee sure is for long days
 	11223344
 
-	-	boolean -- false
+	-	boolean -- 
 	-	byte	--	0
 	-	char 	--	'\u0000'
 	-	short	--	0

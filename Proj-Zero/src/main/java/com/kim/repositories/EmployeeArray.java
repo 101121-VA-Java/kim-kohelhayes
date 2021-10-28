@@ -1,5 +1,6 @@
 package com.kim.repositories;
 
+import com.kim.models.User;
 import com.kim.models.Employee;
 
 public class EmployeeArray implements EmployeeDAO {
@@ -17,7 +18,7 @@ public class EmployeeArray implements EmployeeDAO {
 
 	@Override
 	public Employee getEmployeeById(int id) {
-	
+
 		return employees[id];
 	}
 
@@ -51,15 +52,23 @@ public class EmployeeArray implements EmployeeDAO {
 
 	
 	@Override
-	public String editEmployeeById(int empID) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String editEmployeeByName(Employee emp) {
-		// TODO Auto-generated method stub
-		return null;
+	public Employee editEmployeeByName(Employee emp) {
+		/*
+		 *  edit existing employee by:
+		 *  take in int for id and changed name, changed email, changed password, and/or changed manager
+		 *  change a field in the object
+		 */
+		
+		for(int i = 0; i< employees.length ; i++) {
+			if(emp.getId() == employees[i].getId()) {
+				//update this employee
+				employees[i].setEmail(emp.getEmail());
+				return employees[i];
+			}
+			
+		}
+		
+		return null ;//this catches when no one is found
 	}
 
 	@Override
