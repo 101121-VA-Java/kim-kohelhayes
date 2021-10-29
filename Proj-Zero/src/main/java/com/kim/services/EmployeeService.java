@@ -1,12 +1,13 @@
 package com.kim.services;
 
+
 import com.kim.exceptions.*;
 import com.kim.models.*;
 import com.kim.repositories.*;
 
 public class EmployeeService {
 
-	private EmployeeDAOAble empDAO1;
+	private EmployeeDAO empDAO1;
 
 	public EmployeeService() {
 		super();
@@ -19,8 +20,7 @@ public class EmployeeService {
 		 * add business logic here to manipulate e before storage Employee, when
 		 * registering are going to input - name - email - password
 		 * 
-		 * System should assign, Role, manager - manager is null by default (default
-		 * value of an object is null)
+		 * 
 		 * 
 		 */
 
@@ -31,9 +31,17 @@ public class EmployeeService {
 	}
 
 	public Employee getEmployeeById(int id) throws EmployeeNotFoundException {
-		if (id > 0) // What do I put here
-		{
-			throw new EmployeeNotFoundException();
+		Employee[] employees = { new Employee(0, "TheAdmin", "admin@123.com", "pass", true, "TheAdmin"),
+				new Employee(1, "Manager", "mngr@123.com", "pass", true, "TheAdmin"),
+				new Employee(2, "Kim", "kim@123.com", "pass", false, "Manager") };
+		
+		for(int i = 0; i < employees.length; i++) {
+			if (id != employees[i].getId()) 
+			{
+				throw new EmployeeNotFoundException();
+			}else {
+				return employees[i];
+			}
 		}
 		return null;
 	}

@@ -27,7 +27,6 @@ public class Employee extends User {
 		this.managerName = managerName;
 	}
 
-
 	@Override
 	public String toString() {
 		return "Employee [manager=" + manager + ", managerName=" + managerName + ", id=" + id + ", name=" + name

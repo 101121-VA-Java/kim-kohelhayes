@@ -1,11 +1,14 @@
 package com.kim.repositories;
 
 import com.kim.models.User;
+import com.kim.exceptions.EmployeeNotFoundException;
 import com.kim.models.Employee;
 
 public class EmployeeArray implements EmployeeDAO {
 
-	private Employee[] employees = { new Employee(0, "TheAdmin", "admin@123.com", "pass", true, "TheAdmin") };
+	private Employee[] employees = { new Employee(0, "TheAdmin", "admin@123.com", "pass", true, "TheAdmin"),
+			new Employee(1, "Manager", "mngr@123.com", "pass", true, "TheAdmin"),
+			new Employee(2, "Kim", "kim@123.com", "pass", false, "Manager") };
 
 	public EmployeeArray() {
 		super();
@@ -15,11 +18,21 @@ public class EmployeeArray implements EmployeeDAO {
 	public Employee[] getAllEmployees() {
 		return this.employees;
 	}
-
+	
 	@Override
-	public Employee getEmployeeById(int id) {
+	public Employee getEmployeeById(int id) throws EmployeeNotFoundException  {
+		
 
+		for (int i = 0; i < employees.length; i++) {
+			if (id == employees[i].getId()) {
+				return employees[i];
+			}else {
+				throw new EmployeeNotFoundException(); 
+			}
+
+		}
 		return employees[id];
+		
 	}
 
 	@Override
@@ -50,49 +63,43 @@ public class EmployeeArray implements EmployeeDAO {
 		return i;
 	}
 
-	
 	@Override
 	public Employee editEmployeeByName(Employee emp) {
 		/*
-		 *  edit existing employee by:
-		 *  take in int for id and changed name, changed email, changed password, and/or changed manager
-		 *  change a field in the object
+		 * edit existing employee by: take in int for id and changed name, changed
+		 * email, changed password, and/or changed manager change a field in the object
 		 */
-		
-		for(int i = 0; i< employees.length ; i++) {
-			if(emp.getId() == employees[i].getId()) {
-				//update this employee
+
+		for (int i = 0; i < employees.length; i++) {
+			if (emp.getId() == employees[i].getId()) {
+				// update this employee
 				employees[i].setEmail(emp.getEmail());
 				return employees[i];
 			}
-			
+
 		}
-		
-		return null ;//this catches when no one is found
+
+		return null;// this catches when no one is found
 	}
 
 	@Override
-	public String deleteEmployeeById(int empID) {
-		
+	public boolean deleteEmployeeById(int empID) {
+
 		/*
-		 * delete existing employee record by taking in 
-		 * int id 
-		 * do a for loop to find the id
-		 * do a if statement
+		 * delete existing employee record by taking in int id do a for loop to find the
+		 * id do a if statement
 		 * 
-		 * for(int i = 0; i< employees.length ; i++) {
-		 *	if(emp.getId() == employees[i].getId()) {
+		 * for(int i = 0; i< employees.length ; i++) { if(emp.getId() ==
+		 * employees[i].getId()) {
 		 * 
 		 * delete record from db
 		 * 
-		 * return boolean true for deleted
-		 * return boolean false for not deleted
+		 * return boolean true for deleted return boolean false for not deleted
 		 * 
 		 */
-		
-		
 
 		return null;
 	}
+
 
 }
