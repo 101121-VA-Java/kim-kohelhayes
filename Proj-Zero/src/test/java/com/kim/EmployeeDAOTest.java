@@ -33,16 +33,17 @@ public class EmployeeDAOTest {
 	}
 	
 	@Test
-	public void getEmployeeById() throws EmployeeNotFoundException {
+	public void employeeNotFoundById() throws EmployeeNotFoundException {
 		
-		EmployeeNotFoundException thrown = assertThrows(
-				EmployeeNotFoundException.class,
+		assertThrows(EmployeeNotFoundException.class,
 		           () -> emp.getEmployeeById(3),
-		           "Expected getEmployeeById(3) to throw, but it didn't"
-		    );
-
-		    assertTrue(thrown.getMessage().contains("Employee Not Found"));
-		
+		           "Expected getEmployeeById(3) to throw, but it didn't");
+ 
+	}
+	
+	@Test
+	public void getEmployeeById() throws EmployeeNotFoundException  {
+			
 		Employee expected = new Employee(2, "Kim", "kim@123.com", "pass", false, "Manager");
 		int id = 2;
 		Employee actual = emp.getEmployeeById(id);

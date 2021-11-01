@@ -18,21 +18,21 @@ public class EmployeeArray implements EmployeeDAO {
 	public Employee[] getAllEmployees() {
 		return this.employees;
 	}
-	
+
 	@Override
-	public Employee getEmployeeById(int id) throws EmployeeNotFoundException  {
-		
-
+	public Employee getEmployeeById(int id) throws EmployeeNotFoundException {
 		for (int i = 0; i < employees.length; i++) {
-			if (id == employees[i].getId()) {
-				return employees[i];
-			}else {
-				throw new EmployeeNotFoundException(); 
-			}
+			do {
+				if (id == employees[i].getId()) {
+					return employees[i];
+				}
 
+			} while (i < employees.length);
+			if (id != employees[i].getId()) {
+				throw new EmployeeNotFoundException();
+			}
 		}
-		return employees[id];
-		
+		return null;
 	}
 
 	@Override
@@ -98,8 +98,7 @@ public class EmployeeArray implements EmployeeDAO {
 		 * 
 		 */
 
-		return null;
+		return true;
 	}
-
 
 }
