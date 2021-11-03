@@ -1,18 +1,20 @@
 package com.kim.repositories;
 
+import com.kim.exceptions.ItemNotFoundException;
 import com.kim.models.Item;
 
 public interface ItemDAO {
 
 	Item[] getAllItems();
 
-	Item getItemById(int Id);
+	Item getItemById(int Id) throws ItemNotFoundException;
 
 	int addItem(Item item);
 
-	String editItemById(int itemID);// returns whole item
+	Item editItemById(int itemID) throws ItemNotFoundException;// returns whole item
 
-	String deleteItemById(int itemID);// returns "Delete Successful" or "Delete Unsuccessful"
+	boolean deleteItemById(int itemID);// returns true or false
+	
 	/*
 	 * String[] viewItemByOffer(Item offer); // or should it be viewOffersByItem?
 	 * String[] viewItemsByDept(int deptID); String[] viewAllDepartments();

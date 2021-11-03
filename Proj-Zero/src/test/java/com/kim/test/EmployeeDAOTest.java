@@ -1,4 +1,4 @@
-package com.kim;
+package com.kim.test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,7 +23,9 @@ public class EmployeeDAOTest {
 
 	@Test
 	public void getAllEmployees() {
-		Employee[] expected = { new Employee(0, "TheAdmin", "admin@123.com", "pass", true, "TheAdmin"),
+		
+		Employee[] expected = { 
+				new Employee(0, "TheAdmin", "admin@123.com", "pass", true, "TheAdmin"),
 				new Employee(1, "Manager", "mngr@123.com", "pass", true, "TheAdmin"),
 				new Employee(2, "Kim", "kim@123.com", "pass", false, "Manager") };
 
@@ -51,14 +53,14 @@ public class EmployeeDAOTest {
 
 	@Test
 	public void addEmployeeValid() {
-		Employee[] expected = { new Employee(0, "TheAdmin", "admin@123.com", "pass", true, "TheAdmin"),
+		Employee[] expected = { 
+				new Employee(0, "TheAdmin", "admin@123.com", "pass", true, "TheAdmin"),
 				new Employee(1, "Manager", "mngr@123.com", "pass", true, "TheAdmin"),
 				new Employee(2, "Kim", "kim@123.com", "pass", false, "Manager"),
 				new Employee(3, "Brad", "brad@123.com", "pass", false, "Manager") };
 
 		// Adding an employee
 		emp.addEmployee(new Employee(3, "Brad", "brad@123.com", "pass", false, "Manager"));
-//				
 
 		assertArrayEquals(expected, emp.getAllEmployees());
 	}

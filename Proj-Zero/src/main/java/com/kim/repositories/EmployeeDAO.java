@@ -10,7 +10,7 @@ public interface EmployeeDAO {
 
 	int addEmployee(Employee emp); // returns assigned id
 
-	Employee editEmployeeByName(Employee emp); // returns Employee Object
+	Employee editEmployeeByName(Employee emp) throws EmployeeNotFoundException; // returns Employee Object
 
 	boolean deleteEmployeeById(int empID); // returns true or false
 }

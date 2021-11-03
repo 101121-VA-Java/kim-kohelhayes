@@ -1,12 +1,14 @@
 package com.kim.repositories;
 
-import com.kim.models.User;
+import org.apache.commons.lang3.ArrayUtils;
+
 import com.kim.exceptions.EmployeeNotFoundException;
 import com.kim.models.Employee;
 
 public class EmployeeArray implements EmployeeDAO {
 
-	private Employee[] employees = { new Employee(0, "TheAdmin", "admin@123.com", "pass", true, "TheAdmin"),
+	private Employee[] employees = { 
+			new Employee(0, "TheAdmin", "admin@123.com", "pass", true, "TheAdmin"),
 			new Employee(1, "Manager", "mngr@123.com", "pass", true, "TheAdmin"),
 			new Employee(2, "Kim", "kim@123.com", "pass", false, "Manager") };
 
@@ -22,52 +24,44 @@ public class EmployeeArray implements EmployeeDAO {
 	@Override
 	public Employee getEmployeeById(int id) throws EmployeeNotFoundException {
 		for (int i = 0; i < employees.length; i++) {
-			do {
-				if (id == employees[i].getId()) {
-					return employees[i];
-				}
-
-			} while (i < employees.length);
-			if (id != employees[i].getId()) {
-				throw new EmployeeNotFoundException();
+			if (id == employees[i].getId()) {
+				return employees[i];
 			}
 		}
-		return null;
+			throw new EmployeeNotFoundException();
 	}
 
 	@Override
-	public int addEmployee(Employee e) {
+	public int addEmployee(Employee employee) {
 
-		// Create a temp array of size employees + 1
-		Employee[] temp = new Employee[employees.length + 1];
-
-		int i = 0;
-
-		for (; i < employees.length; i++) {
-			temp[i] = employees[i];
+		// Create a tempArray of size employees + 1
+		Employee[] tempArray = new Employee[employees.length + 1];
+		int iterator = 0;
+		for (; iterator < employees.length; iterator++) {
+			tempArray[iterator] = employees[iterator];
 		}
 		/*
-		 * i is the value of the last index of the new array (employees.length) set i to
+		 * iterator is the value of the last index of the new array
+		 * (employees.length) set iterator to
 		 * be the id for the new employee
 		 */
-		e.setId(i);
-
+		employee.setId(iterator);
 		// adding the new employee to the array
-		temp[i] = e;
-
+		tempArray[iterator] = employee;
 		/*
 		 * assign the newly created array to employees
 		 */
-		employees = temp;
+		employees = tempArray;
 		System.out.println(employees);
-		return i;
+		return iterator;
 	}
 
 	@Override
-	public Employee editEmployeeByName(Employee emp) {
+	public Employee editEmployeeByName(Employee emp) throws EmployeeNotFoundException {
 		/*
-		 * edit existing employee by: take in int for id and changed name, changed
-		 * email, changed password, and/or changed manager change a field in the object
+		 * edit existing employee by: take in int for id and 
+		 * changed name, changed email, changed password, 
+		 * and/or changed manager change a field in the object
 		 */
 
 		for (int i = 0; i < employees.length; i++) {
@@ -79,7 +73,7 @@ public class EmployeeArray implements EmployeeDAO {
 
 		}
 
-		return null;// this catches when no one is found
+		throw new EmployeeNotFoundException();
 	}
 
 	@Override
@@ -89,16 +83,15 @@ public class EmployeeArray implements EmployeeDAO {
 		 * delete existing employee record by taking in int id do a for loop to find the
 		 * id do a if statement
 		 * 
-		 * for(int i = 0; i< employees.length ; i++) { if(emp.getId() ==
-		 * employees[i].getId()) {
+		 * for(int i = 0; i< employees.length ; i++) { 
+		 * if(empID == employees[i].getId()) {
 		 * 
 		 * delete record from db
 		 * 
 		 * return boolean true for deleted return boolean false for not deleted
 		 * 
 		 */
-
-		return true;
+		return false;
 	}
 
 }

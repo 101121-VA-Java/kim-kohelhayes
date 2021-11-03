@@ -5,7 +5,8 @@ public class Employee extends User {
 	private boolean manager;
 	private String managerName;
 
-	public Employee(int id, String name, String email, String password, boolean manager, String managerName) {
+	public Employee(int id, String name, String email, String password, 
+			boolean manager, String managerName) {
 		super(id, name, email, password);
 		this.manager = manager;
 		this.managerName = managerName;
@@ -29,7 +30,8 @@ public class Employee extends User {
 
 	@Override
 	public String toString() {
-		return "Employee [manager=" + manager + ", managerName=" + managerName + ", id=" + id + ", name=" + name
+		return "Employee [manager=" + manager + ", managerName=" + managerName +
+				", id=" + id + ", name=" + name
 				+ ", email=" + email + ", password=" + password + "]";
 	}
 
