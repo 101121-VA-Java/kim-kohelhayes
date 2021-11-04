@@ -4,14 +4,14 @@ public class User {
 
 	protected int id;
 	protected String name;
-	protected String email;
+	protected String username;
 	protected String password;
 
-	public User(int id, String name, String email, String password) {
+	public User(int id, String name, String username, String password) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.email = email;
+		this.username = username;
 		this.password = password;
 	}
 
@@ -31,12 +31,12 @@ public class User {
 		this.name = name;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUsername(String email) {
+		this.username = email;
 	}
 
 	public String getPassword() {
@@ -49,14 +49,14 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "Users [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + "]";
+		return "Users [id=" + id + ", name=" + name + ", username=" + username + ", password=" + password + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
@@ -72,10 +72,10 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (email == null) {
-			if (other.email != null)
+		if (username == null) {
+			if (other.username != null)
 				return false;
-		} else if (!email.equals(other.email))
+		} else if (!username.equals(other.username))
 			return false;
 		if (id != other.id)
 			return false;

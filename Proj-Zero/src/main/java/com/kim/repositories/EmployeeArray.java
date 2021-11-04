@@ -67,7 +67,7 @@ public class EmployeeArray implements EmployeeDAO {
 		for (int i = 0; i < employees.length; i++) {
 			if (emp.getId() == employees[i].getId()) {
 				// update this employee
-				employees[i].setEmail(emp.getEmail());
+				employees[i].setUsername(emp.getUsername());
 				return employees[i];
 			}
 
