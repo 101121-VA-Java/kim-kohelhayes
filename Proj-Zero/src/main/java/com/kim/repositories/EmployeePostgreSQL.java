@@ -11,7 +11,6 @@ import java.util.List;
 
 import com.kim.exceptions.EmployeeNotFoundException;
 import com.kim.models.Employee;
-import com.kim.models.User;
 import com.kim.util.ConnectionUtil;
 
 public class EmployeePostgreSQL implements EmployeeDAO {
@@ -85,7 +84,7 @@ public class EmployeePostgreSQL implements EmployeeDAO {
 	@Override
 	public boolean addEmployee(Employee emp) {
 		
-		String sql = "insert into employees (name, username, password, manager, managerName) "
+		String sql = "insert into employees (n_me, username, pswrd, manager, manager_name) "
 				+ "values (?, ?, ?, ?, ?);";
 
 		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
@@ -112,8 +111,8 @@ public class EmployeePostgreSQL implements EmployeeDAO {
 
 	@Override
 	public boolean editEmployee(Employee emp) throws EmployeeNotFoundException {
-		String sql = "update employees set id = ?, name = ?, username = ?, password = ?,"
-				+ " employees.id = ?, manager = ?, managerName = ?;";
+		String sql = "update employees set id = ?, n_me = ?, username = ?, pswrd = ?,"
+				+ " employees.id = ?, manager = ?, manager_name = ?;";
 
 		int rowsChanged = -1;
 
@@ -146,7 +145,7 @@ public class EmployeePostgreSQL implements EmployeeDAO {
 	
 
 	@Override
-	public boolean deleteEmployeeById(int empID) {
+	public boolean deleteEmployee(int empID) {
 		String sql = "delete from employees where employees.id = ?;";
 		
 		int rowsChanged = -1;

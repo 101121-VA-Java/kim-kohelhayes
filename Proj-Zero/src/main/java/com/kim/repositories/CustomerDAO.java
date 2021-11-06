@@ -1,6 +1,8 @@
 package com.kim.repositories;
 
 import com.kim.models.Customer;
+import com.kim.models.Item;
+
 import java.util.List;
 
 import com.kim.exceptions.CustomerNotFoundException;
@@ -14,11 +16,11 @@ public interface CustomerDAO {
 
 	boolean editCustomer(Customer cust) throws CustomerNotFoundException; // returns String of Customer's information to look at
 
-	boolean deleteCustomerById(int custID); // returns boolean
+	boolean deleteCustomer(int custID); // returns boolean
 	
 	double viewCustomerCreditLine(int custID); // takes in customer object returns double
 	
 	double viewCustomerDue(int custID); // takes in customer object returns double
 	
-	//ArrayList viewItemsBought(Customer cust); // takes in customer object returns ArrayList
+	List<Item> viewItemsBought(int custID); // takes in customer object returns ArrayList
 }

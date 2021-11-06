@@ -11,7 +11,7 @@ import java.util.List;
 
 import com.kim.exceptions.CustomerNotFoundException;
 import com.kim.models.Customer;
-import com.kim.models.User;
+import com.kim.models.Item;
 import com.kim.util.ConnectionUtil;
 
 public class CustomerPostgreSQL implements CustomerDAO {
@@ -39,8 +39,8 @@ public class CustomerPostgreSQL implements CustomerDAO {
 			}
 		} catch (SQLException c) {
 			c.printStackTrace();
-		}catch (IOException io ) {
-			io.printStackTrace();
+		}catch (IOException c ) {
+			c.printStackTrace();
 		}
 		
 		return customers;
@@ -85,7 +85,7 @@ public class CustomerPostgreSQL implements CustomerDAO {
 	@Override
 	public boolean addCustomer(Customer cust) {
 		
-		String sql = "insert into customers (name, username, password, credit_line, amount_due) "
+		String sql = "insert into customers (n_me, username, pswrd, credit_line, amount_due) "
 				+ "values (?, ?, ?, ?, ?);";
 
 		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
@@ -112,7 +112,7 @@ public class CustomerPostgreSQL implements CustomerDAO {
 
 	@Override
 	public boolean editCustomer(Customer cust) throws CustomerNotFoundException {
-		String sql = "update customers set id = ?, name = ?, username = ?, password = ?,"
+		String sql = "update customers set id = ?, n_me = ?, username = ?, pswrd = ?,"
 				+ " customer.id = ?, credit_line = ?, amount_due = ?;";
 
 		int rowsChanged = -1;
@@ -146,7 +146,7 @@ public class CustomerPostgreSQL implements CustomerDAO {
 	
 
 	@Override
-	public boolean deleteCustomerById(int custID) {
+	public boolean deleteCustomer(int custID) {
 		String sql = "delete from customers where customers.id = ?;";
 		
 		int rowsChanged = -1;
@@ -221,5 +221,13 @@ public class CustomerPostgreSQL implements CustomerDAO {
 		return dbl;
 		
 	}
+
+	@Override
+	public List<Item> viewItemsBought(int custID) {
+//		String sql = "select * from items where select item.id from customer_items where customers.id = ?;";
+		
+		return null;
+	}
+
 
 }

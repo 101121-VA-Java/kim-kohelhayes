@@ -14,5 +14,5 @@ public interface EmployeeDAO {
 
 	boolean editEmployee(Employee emp) throws EmployeeNotFoundException; // returns Employee Object
 
-	boolean deleteEmployeeById(int empID); // returns true or false
+	boolean deleteEmployee(int empID); // returns true or false
 }
