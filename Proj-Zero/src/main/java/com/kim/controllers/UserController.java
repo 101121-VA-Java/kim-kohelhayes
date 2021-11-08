@@ -30,10 +30,10 @@ public class UserController {
 		String password = scan.nextLine();
 		
 		
-		User newUser = new User(name, username, password);
+//		User newUser = new User(name, username, password);
 		
 		// TODO: check whether an User created or not (if the method works)
-		us.addUser(newUser);
+//		us.addUser(newUser);
 		
 		System.out.println("User has been registered");
 		

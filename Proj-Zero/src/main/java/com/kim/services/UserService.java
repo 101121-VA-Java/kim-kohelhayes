@@ -23,18 +23,8 @@ public class UserService {
 
 	public void addUser(User newUser) {
 
-		/*
-		 * add business logic here to manipulate u before storage
-		 * User, when registering are going to input 
-		 * 		- name
-		 * 		- Username
-		 * 		- password
-		 * 
-		 * System should assign id
-		 * 		
-		 * 		
-		 */
 		
+
 		
 	}
 	
@@ -45,6 +35,13 @@ public class UserService {
 		} 
 
 		return null;
+	}
+
+
+
+	public int register(User newUser, String roleChoice) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	

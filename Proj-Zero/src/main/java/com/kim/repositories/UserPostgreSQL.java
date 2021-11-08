@@ -9,7 +9,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.kim.models.Employee;
 import com.kim.models.User;
 import com.kim.util.ConnectionUtil;
 
@@ -29,8 +28,9 @@ public class UserPostgreSQL implements UserDAO {
 				String name = rs.getString("n_me");
 				String username = rs.getString("username");
 				String password = rs.getString("pswrd");
+				String position = rs.getString("pstn");
 
-				User newUser = new User(id, name, username, password);
+				User newUser = new User(id, name, username, password, position);
 				users.add(newUser);
 			}
 		} catch (SQLException | IOException u) {
@@ -71,8 +71,8 @@ public class UserPostgreSQL implements UserDAO {
 	@Override
 	public int addUser(User user) {
 		int newId = -1;
-		String sql = "insert into users (n_me, username, pswrd)"
-				+ " values (?, ?, ?)  returning id;";
+		String sql = "insert into users (n_me, username, pswrd, pstn)"
+				+ " values (?, ?, ?, ?)  returning id;";
 		
 
 		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
@@ -81,6 +81,7 @@ public class UserPostgreSQL implements UserDAO {
 			ps.setString(1, user.getName());
 			ps.setString(2, user.getUsername());
 			ps.setString(3, user.getPassword());
+			ps.setString(4, user.getPosition());
 
 			ResultSet rs = ps.executeQuery();
 
@@ -100,15 +101,56 @@ public class UserPostgreSQL implements UserDAO {
 
 	@Override
 	public boolean editUser(User user) {
-		// TODO Auto-generated method stub
-		return false;
+		String sql = "update employees set id = ?, n_me = ?, username = ?, pswrd = ?,"
+				+ " pstn = ?;";
+
+		int rowsChanged = -1;
+
+		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
+			PreparedStatement ps = con.prepareStatement(sql);
+
+			ps.setInt(1, user.getId());
+			ps.setString(2, user.getName());
+			ps.setString(3, user.getUsername());
+			ps.setString(4, user.getPassword());
+			ps.setString(5, user.getPosition());
+
+			rowsChanged = ps.executeUpdate();
+
+		} catch (SQLException | IOException u) {
+			u.printStackTrace();
+		}
+
+		if (rowsChanged > 0) {
+			return true;
+		} else {
+			return false;
+		}
+
 	}
 
 
 	@Override
 	public boolean deleteUser(int userID) {
-		// TODO Auto-generated method stub
-		return false;
+		String sql = "delete from users where id = ?;";
+
+		int rowsChanged = -1;
+
+		try (Connection con = ConnectionUtil.getConnectionFromFile();) {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, userID);
+
+			rowsChanged = ps.executeUpdate();
+
+		} catch (SQLException | IOException u) {
+			u.printStackTrace();
+		}
+
+		if (rowsChanged > 0) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }
