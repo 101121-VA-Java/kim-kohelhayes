@@ -14,9 +14,7 @@ public class UserService {
 	public UserService() {
 		super();
 		List<User> usrs = usrDao.getAllUsers();
-		for (User u : usrs) {
-			System.out.println(u);
-		}
+		
 	}
 
 	
