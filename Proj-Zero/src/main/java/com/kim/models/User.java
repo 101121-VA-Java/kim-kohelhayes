@@ -1,25 +1,30 @@
 package com.kim.models;
 
+import java.util.Objects;
+
 public class User {
 
 	protected int id;
 	protected String name;
 	protected String username;
 	protected String password;
+	protected String position;
 
-	public User(int id, String name, String username, String password) {
+	public User(int id, String name, String username, String password, String position) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.username = username;
 		this.password = password;
+		this.position = position;
 	}
 
-	public User(String name, String username, String password) {
+	public User(String name, String username, String password, String position) {
 		super();
 		this.name = name;
 		this.username = username;
 		this.password = password;
+		this.position = position;
 	}
 
 	
@@ -52,27 +57,30 @@ public class User {
 	}
 
 	public String getPassword() {
-		return password;
+		return position;
 	}
 
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
 	@Override
 	public String toString() {
-		return "Users [id=" + id + ", name=" + name + ", username=" + username + ", password=" + password + "]";
+		return "User [id=" + id + ", name=" + name + ", username=" + username + ", password=" + password + ", position="
+				+ position + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
-		result = prime * result + id;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		return result;
+		return Objects.hash(id, name, password, position, username);
 	}
 
 	@Override
@@ -84,24 +92,10 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (username == null) {
-			if (other.username != null)
-				return false;
-		} else if (!username.equals(other.username))
-			return false;
-		if (id != other.id)
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		return true;
+		return id == other.id && Objects.equals(name, other.name) && Objects.equals(password, other.password)
+				&& Objects.equals(position, other.position) && Objects.equals(username, other.username);
 	}
 
+	
+	
 }

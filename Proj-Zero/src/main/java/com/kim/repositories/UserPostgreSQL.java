@@ -33,10 +33,8 @@ public class UserPostgreSQL implements UserDAO {
 				User newUser = new User(id, name, username, password);
 				users.add(newUser);
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (IOException io) {
-			io.printStackTrace();
+		} catch (SQLException | IOException u) {
+			u.printStackTrace();
 		}
 
 		return users;
@@ -62,9 +60,7 @@ public class UserPostgreSQL implements UserDAO {
 
 				userID = id;
 			}
-		} catch (SQLException u) {
-			u.printStackTrace();
-		} catch (IOException u) {
+		} catch (SQLException | IOException u) {
 			u.printStackTrace();
 		}
 
