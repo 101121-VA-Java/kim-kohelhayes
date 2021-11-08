@@ -1,49 +1,51 @@
 package com.kim.services;
 
 
+import java.util.List;
+
 import com.kim.exceptions.*;
 import com.kim.models.*;
 import com.kim.repositories.*;
 
 public class EmployeeService {
 
-	private EmployeeDAO empDAO1;
-
+	private EmployeeDAO empDao = new EmployeePostgreSQL();
+	
 	public EmployeeService() {
 		super();
-//		empDAO1 = new EmployeeArray();
+		List<Employee> emps = empDao.getAllEmployees();
+		for (Employee e : emps) {
+			System.out.println(e);
+		}
 	}
 
-//	public int addEmployee(Employee emp) {
-//
-//		/*
-//		 * add business logic here to manipulate e before storage Employee, when
-//		 * registering are going to input - name - email - password
-//		 * 
-//		 * 
-//		 * 
-//		 */
-//
-//		emp.setName(null);
 
-//		return empDAO1.addEmployee(emp);
+	public void addEmployee(Employee newEmp) {
 
-//	}
-
-//	public Employee getEmployeeById(int id) throws EmployeeNotFoundException {
-//		Employee[] employees = { new Employee(0, "TheAdmin", "admin@123.com", "pass", true, "TheAdmin"),
-//				new Employee(1, "Manager", "mngr@123.com", "pass", true, "TheAdmin"),
-//				new Employee(2, "Kim", "kim@123.com", "pass", false, "Manager") };
+		/*
+		 * add business logic here to manipulate u before storage
+		 * Employee, when registering are going to input 
+		 * 		- user.name
+		 * 		- user.username
+		 * 		- user.password
+		 * 
+		 * System should assign 
+		 * 	-manager status - true/false
+		 * 	-manager name - Admin
+		 * 		
+		 */
 		
-//		for(int i = 0; i < employees.length; i++) {
-//			if (id != employees[i].getId()) 
-//			{
-//				throw new EmployeeNotFoundException();
-//			}else {
-//				return employees[i];
-//			}
-//		}
-//		return null;
-//	}
+		
+	}
+	
+	public Employee getEmployeeById(int id) throws EmployeeNotFoundException  {
 
+		if(id > 0) { // just for example's sake
+		throw new EmployeeNotFoundException();
+		} 
+
+		return null;
+	}
+
+	
 }

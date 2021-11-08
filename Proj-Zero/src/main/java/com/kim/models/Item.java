@@ -7,12 +7,20 @@ public class Item {
 	private int id;
 	private String name;
 	private String description;
-	private int dept_id; 
+	private int dept_id;
 	private int status_id;
 
 	public Item(int id, String name, String description, int dept_id, int status_id) {
 		super();
 		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.dept_id = dept_id;
+		this.status_id = status_id;
+	}
+
+	public Item(String name, String description, int dept_id, int status_id) {
+		super();
 		this.name = name;
 		this.description = description;
 		this.dept_id = dept_id;
@@ -83,6 +91,4 @@ public class Item {
 				&& Objects.equals(name, other.name) && status_id == other.status_id;
 	}
 
-	
-	
 }

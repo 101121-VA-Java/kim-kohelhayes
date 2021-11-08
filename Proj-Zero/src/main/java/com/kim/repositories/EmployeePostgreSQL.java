@@ -11,13 +11,16 @@ import java.util.List;
 
 import com.kim.exceptions.EmployeeNotFoundException;
 import com.kim.models.Employee;
+import com.kim.models.User;
 import com.kim.util.ConnectionUtil;
 
 public class EmployeePostgreSQL implements EmployeeDAO {
 
 	@Override
 	public List<Employee> getAllEmployees() {
-		String sql = "select * from employees;";
+		String sql = "select users.id," + "	users.n_me," + "	users.username," + "	users.pswrd,"
+				+ "	employees.e_id," + "	employees.manager," + "	employees.manager_name" + " from users"
+				+ " inner join employees" + " on users.id = employees.user_id" + " order by users.id";
 		List<Employee> employees = new ArrayList<>();
 
 		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
@@ -29,25 +32,27 @@ public class EmployeePostgreSQL implements EmployeeDAO {
 				String name = rs.getString("n_me");
 				String username = rs.getString("username");
 				String password = rs.getString("pswrd");
-				int e_id = rs.getInt("employees.id");
+				int e_id = rs.getInt("e_id");
 				boolean manager = rs.getBoolean("manager");
 				String managerName = rs.getString("manager_name");
-				Employee newEmp = new Employee(id, name, username, password, e_id,
-						manager, managerName);
+				Employee newEmp = new Employee(id, name, username, password, e_id, manager, managerName);
 				employees.add(newEmp);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}catch (IOException io ) {
+		} catch (IOException io) {
 			io.printStackTrace();
 		}
-		
+
 		return employees;
 	}
 
 	@Override
-	public Employee getEmployeeById(int empID) throws EmployeeNotFoundException {
-		String sql = "select * from employees where employees.id = ? ";
+	public Employee getEmployeeById(int empID) {
+		String sql = "select users.id," + "	users.n_me," + "	users.username," + "	users.pswrd,"
+				+ "	employees.e_id," + "	employees.manager," + "	employees.manager_name" + " from users"
+				+ " inner join employees" + " on users.id = employees.user_id" + " where users.id = ?"
+				+ " order by users.id";
 		Employee emp = null;
 
 		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
@@ -62,55 +67,51 @@ public class EmployeePostgreSQL implements EmployeeDAO {
 				String name = rs.getString("n_me");
 				String username = rs.getString("username");
 				String password = rs.getString("pswrd");
-				int e_id = rs.getInt("employees.id");
+				int e_id = rs.getInt("e_id");
 				boolean manager = rs.getBoolean("manager");
 				String managerName = rs.getString("manager_name");
 				emp = new Employee(id, name, username, password, e_id, manager, managerName);
-			} else throw new EmployeeNotFoundException();
-				
-		} catch (EmployeeNotFoundException e) {
-			e.printStackTrace();
-		
+			}
 		} catch (SQLException | IOException e) {
 			e.printStackTrace();
-			
 		}
-		
+
 		return emp;
-		
-		
+
 	}
 
+
 	@Override
-	public boolean addEmployee(Employee emp) {
-		
-		String sql = "insert into employees (n_me, username, pswrd, manager, manager_name) "
-				+ "values (?, ?, ?, ?, ?);";
+	public int addEmployee(Employee emp) {
+		int newId = -1;
+		String sql = "insert into employees (manager, manager_name, user_id)"
+				+ " values (?, ?, ?) returning e_id;";
 
 		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
 			PreparedStatement ps = con.prepareStatement(sql);
 
-			ps.setString(1, emp.getName());
-			ps.setString(2, emp.getUsername());
-			ps.setString(3, emp.getPassword());
-			ps.setBoolean(4, emp.isManager());
-			ps.setString(5, emp.getManagerName());
+			
+			ps.setBoolean(1, emp.isManager());
+			ps.setString(2, emp.getManagerName());
+			ps.setInt(3, emp.getId());
 
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
-				return true;
+				newId = rs.getInt("e_id");
 			}
+			
 
 		} catch (SQLException | IOException e) {
 			e.printStackTrace();
 		}
 
-		return false; 
+		return newId;	
+			
 	}
 
 	@Override
-	public boolean editEmployee(Employee emp) throws EmployeeNotFoundException {
+	public boolean editEmployee(Employee emp) {
 		String sql = "update employees set id = ?, n_me = ?, username = ?, pswrd = ?,"
 				+ " employees.id = ?, manager = ?, manager_name = ?;";
 
@@ -120,7 +121,7 @@ public class EmployeePostgreSQL implements EmployeeDAO {
 			PreparedStatement ps = con.prepareStatement(sql);
 
 			ps.setInt(1, emp.getId());
-			ps.setString(2,	emp.getName());
+			ps.setString(2, emp.getName());
 			ps.setString(3, emp.getUsername());
 			ps.setString(4, emp.getPassword());
 			ps.setInt(5, emp.getE_id());
@@ -128,38 +129,37 @@ public class EmployeePostgreSQL implements EmployeeDAO {
 			ps.setString(7, emp.getManagerName());
 
 			rowsChanged = ps.executeUpdate();
-			
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 		if (rowsChanged > 0) {
 			return true;
 		} else {
 			return false;
 		}
-		
+
 	}
-	
 
 	@Override
 	public boolean deleteEmployee(int empID) {
 		String sql = "delete from employees where employees.id = ?;";
-		
+
 		int rowsChanged = -1;
 
 		try (Connection con = ConnectionUtil.getConnectionFromFile();) {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, empID);
-			
+
 			rowsChanged = ps.executeUpdate();
-			
+
 		} catch (SQLException | IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		if (rowsChanged > 0) {
 			return true;
 		} else {

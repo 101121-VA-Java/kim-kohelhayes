@@ -16,27 +16,18 @@ public class Employee extends User {
 		this.managerName = managerName;
 	}
 
+	public Employee(String name, String username, String password, 
+			boolean manager, String managerName) {
+		super(name, username, password);
+		this.manager = manager;
+		this.managerName = managerName;
+	}
 	
-
-	public Employee(int id, String name, String username, String password, int e_id) {
-		super(id, name, username, password);
-		this.e_id = e_id;
+	public Employee(boolean manager, String managerName, int id) {
+		super(id);
+		this.manager = manager;
+		this.managerName = managerName;
 	}
-
-	
-
-	public Employee(int id, String name, String username, String password) {
-		super(id, name, username, password);
-		// TODO Auto-generated constructor stub
-	}
-
-
-
-	public Employee(int id2) {
-		super(id2);
-		// TODO Auto-generated constructor stub
-	}
-
 
 
 	public int getE_id() {

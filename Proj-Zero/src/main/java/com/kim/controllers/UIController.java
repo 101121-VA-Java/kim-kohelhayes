@@ -5,14 +5,12 @@ import java.util.Scanner;
 public class UIController {
 	
 	private Scanner scan;
-	private EmployeeController ec;
-	private CustomerController cc;
+	private UserController uc;
 	
 	public UIController() {
 		scan = new Scanner(System.in);
-		ec = new EmployeeController();
-		cc = new CustomerController();
-	}
+		uc = new UserController();	
+		}
 	
 
 	public void run() {
@@ -20,27 +18,20 @@ public class UIController {
 		
 		while(run) {
 			System.out.println("Please select an option:");
-			System.out.println("1: Customers Register Here");
-			System.out.println("2: Customers Login Here");
-			System.out.println("3: Employees Register Here");
-			System.out.println("4: Employees Login Here");
+			System.out.println("1: New Users Register Here");
+			System.out.println("2: Login Here");
 			System.out.println("3: exit");
 			
 			String choice = scan.nextLine();
 			
 			switch(choice) {
 			case "1":
-				cc.registerCustomer(scan);
-				// TODO: if a customer is not registered, display a different message
+				uc.registerUser(scan);
+				// TODO: if a user is not registered, display a different message
 				break;
 			case "2":
-				break;
-			case "3":
-				ec.registerEmployee(scan);
-				// TODO: if an employee is not registered, display a different message	
-			case "4":
 				break;	
-			case "5":
+			case "3":
 				run = false;
 				break;
 			default:
@@ -52,3 +43,11 @@ public class UIController {
 	
 	}
 }
+
+//
+//System.out.println("Please select an option:");
+//System.out.println("1: Customers Register Here");
+//System.out.println("2: Customers Login Here");
+//System.out.println("3: Employees Register Here");
+//System.out.println("4: Employees Login Here");
+//System.out.println("3: exit");

@@ -33,21 +33,20 @@ public class CustomerPostgreSQL implements CustomerDAO {
 				int c_id = rs.getInt("customer.id");
 				double creditLine = rs.getDouble("credit_line");
 				double amountDue = rs.getDouble("amount_due");
-				Customer newCust = new Customer(id, name, username, password, c_id,
-						creditLine, amountDue);
+				Customer newCust = new Customer(id, name, username, password, c_id, creditLine, amountDue);
 				customers.add(newCust);
 			}
 		} catch (SQLException c) {
 			c.printStackTrace();
-		}catch (IOException c ) {
+		} catch (IOException c) {
 			c.printStackTrace();
 		}
-		
+
 		return customers;
 	}
 
 	@Override
-	public Customer getCustomerById(int custID) throws CustomerNotFoundException {
+	public Customer getCustomerById(int custID) {
 		String sql = "select * from customers where customer.id = ? ";
 		Customer cust = null;
 
@@ -67,24 +66,16 @@ public class CustomerPostgreSQL implements CustomerDAO {
 				double creditLine = rs.getDouble("credit_line");
 				double amountDue = rs.getDouble("amount_due");
 				cust = new Customer(id, name, username, password, c_id, creditLine, amountDue);
-			} else throw new CustomerNotFoundException();
-				
-		} catch (CustomerNotFoundException c) {
-			c.printStackTrace();
-		
+			}
 		} catch (SQLException | IOException c) {
 			c.printStackTrace();
-			
 		}
-		
 		return cust;
-		
-		
 	}
 
 	@Override
 	public boolean addCustomer(Customer cust) {
-		
+
 		String sql = "insert into customers (n_me, username, pswrd, credit_line, amount_due) "
 				+ "values (?, ?, ?, ?, ?);";
 
@@ -107,11 +98,11 @@ public class CustomerPostgreSQL implements CustomerDAO {
 			c.printStackTrace();
 		}
 
-		return false; 
+		return false;
 	}
 
 	@Override
-	public boolean editCustomer(Customer cust) throws CustomerNotFoundException {
+	public boolean editCustomer(Customer cust) {
 		String sql = "update customers set id = ?, n_me = ?, username = ?, pswrd = ?,"
 				+ " customer.id = ?, credit_line = ?, amount_due = ?;";
 
@@ -121,7 +112,7 @@ public class CustomerPostgreSQL implements CustomerDAO {
 			PreparedStatement ps = con.prepareStatement(sql);
 
 			ps.setInt(1, cust.getId());
-			ps.setString(2,	cust.getName());
+			ps.setString(2, cust.getName());
 			ps.setString(3, cust.getUsername());
 			ps.setString(4, cust.getPassword());
 			ps.setInt(5, cust.getC_id());
@@ -129,38 +120,37 @@ public class CustomerPostgreSQL implements CustomerDAO {
 			ps.setDouble(7, cust.getAmountDue());
 
 			rowsChanged = ps.executeUpdate();
-			
-			} catch (SQLException c) {
-				c.printStackTrace();
-			} catch (IOException c) {
-				c.printStackTrace();
-			}
-			
+
+		} catch (SQLException c) {
+			c.printStackTrace();
+		} catch (IOException c) {
+			c.printStackTrace();
+		}
+
 		if (rowsChanged > 0) {
 			return true;
 		} else {
 			return false;
 		}
-		
+
 	}
-	
 
 	@Override
 	public boolean deleteCustomer(int custID) {
 		String sql = "delete from customers where customers.id = ?;";
-		
+
 		int rowsChanged = -1;
 
 		try (Connection con = ConnectionUtil.getConnectionFromFile();) {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, custID);
-			
+
 			rowsChanged = ps.executeUpdate();
-			
+
 		} catch (SQLException | IOException c) {
 			c.printStackTrace();
 		}
-		
+
 		if (rowsChanged > 0) {
 			return true;
 		} else {
@@ -172,62 +162,61 @@ public class CustomerPostgreSQL implements CustomerDAO {
 	public double viewCustomerCreditLine(int custID) {
 		String sql = "select credit_line from customers where customers.id = ?;";
 		double dbl = 0;
-		
+
 		try (Connection con = ConnectionUtil.getConnectionFromFile();) {
 			PreparedStatement ps = con.prepareStatement(sql);
-			
+
 			ps.setInt(1, custID);
 
-			ResultSet rs = ps.executeQuery();	
-						
+			ResultSet rs = ps.executeQuery();
+
 			if (rs.next()) {
 				double creditLine = rs.getDouble("credit_line");
 				dbl = creditLine;
 			}
-			
+
 		} catch (SQLException c) {
 			c.printStackTrace();
 		} catch (IOException c) {
 			c.printStackTrace();
 		}
-		
+
 		return dbl;
-		
+
 	}
 
 	@Override
 	public double viewCustomerDue(int custID) {
 		String sql = "select amount_due from customers where customers.id = ?;";
 		double dbl = 0;
-		
+
 		try (Connection con = ConnectionUtil.getConnectionFromFile();) {
 			PreparedStatement ps = con.prepareStatement(sql);
-			
+
 			ps.setInt(1, custID);
 
-			ResultSet rs = ps.executeQuery();	
-						
+			ResultSet rs = ps.executeQuery();
+
 			if (rs.next()) {
 				double amountDue = rs.getDouble("amount_due");
 				dbl = amountDue;
 			}
-			
+
 		} catch (SQLException c) {
 			c.printStackTrace();
 		} catch (IOException c) {
 			c.printStackTrace();
 		}
-		
+
 		return dbl;
-		
+
 	}
 
 	@Override
 	public List<Item> viewItemsBought(int custID) {
 //		String sql = "select * from items where select item.id from customer_items where customers.id = ?;";
-		
+
 		return null;
 	}
-
 
 }

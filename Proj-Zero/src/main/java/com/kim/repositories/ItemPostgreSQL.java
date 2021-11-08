@@ -37,15 +37,15 @@ public class ItemPostgreSQL implements ItemDAO {
 			}
 		} catch (SQLException it) {
 			it.printStackTrace();
-		}catch (IOException it ) {
+		} catch (IOException it) {
 			it.printStackTrace();
 		}
-		
+
 		return items;
 	}
 
 	@Override
-	public Item getItemById(int itemID) throws ItemNotFoundException {
+	public Item getItemById(int itemID) {
 		String sql = "select * from items where items.id = ? ";
 		Item item = null;
 
@@ -63,23 +63,19 @@ public class ItemPostgreSQL implements ItemDAO {
 				int dept_id = rs.getInt("dept_id");
 				int status_id = rs.getInt("status_id");
 				item = new Item(id, name, description, dept_id, status_id);
-			} else throw new ItemNotFoundException();
-				
-		} catch (ItemNotFoundException it) {
-			it.printStackTrace();
-		
+			}
+
 		} catch (SQLException | IOException it) {
 			it.printStackTrace();
-			
+
 		}
-		
+
 		return item;
 	}
 
 	@Override
 	public boolean addItem(Item item) {
-		String sql = "insert into items (n_me, description, dept_id, status_id) "
-				+ "values (?, ?, ?, ?, ?);";
+		String sql = "insert into items (n_me, description, dept_id, status_id) " + "values (?, ?, ?, ?, ?);";
 
 		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -99,13 +95,12 @@ public class ItemPostgreSQL implements ItemDAO {
 			it.printStackTrace();
 		}
 
-		return false; 
+		return false;
 	}
 
 	@Override
-	public boolean editItem(Item item) throws ItemNotFoundException {
-		String sql = "update items set id = ?, n_me = ?, description = ?, dept_id = ?,"
-				+ " status_id = ?;";
+	public boolean editItem(Item item) {
+		String sql = "update items set id = ?, n_me = ?, description = ?, dept_id = ?," + " status_id = ?;";
 
 		int rowsChanged = -1;
 
@@ -119,13 +114,13 @@ public class ItemPostgreSQL implements ItemDAO {
 			ps.setInt(5, item.getStatus_id());
 
 			rowsChanged = ps.executeUpdate();
-			
-			} catch (SQLException it) {
-				it.printStackTrace();
-			} catch (IOException it) {
-				it.printStackTrace();
-			}
-			
+
+		} catch (SQLException it) {
+			it.printStackTrace();
+		} catch (IOException it) {
+			it.printStackTrace();
+		}
+
 		if (rowsChanged > 0) {
 			return true;
 		} else {
@@ -136,19 +131,19 @@ public class ItemPostgreSQL implements ItemDAO {
 	@Override
 	public boolean deleteItem(int itemID) {
 		String sql = "delete from items where employees.id = ?;";
-		
+
 		int rowsChanged = -1;
 
 		try (Connection con = ConnectionUtil.getConnectionFromFile();) {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, itemID);
-			
+
 			rowsChanged = ps.executeUpdate();
-			
+
 		} catch (SQLException | IOException it) {
 			it.printStackTrace();
 		}
-		
+
 		if (rowsChanged > 0) {
 			return true;
 		} else {

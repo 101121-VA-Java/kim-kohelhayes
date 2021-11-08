@@ -9,12 +9,12 @@ public interface ItemDAO {
 
 	List<Item> getAllItems();
 
-	Item getItemById(int itemId) throws ItemNotFoundException;
+	Item getItemById(int itemId);
 
 	boolean addItem(Item item);
 
-	boolean editItem(Item item) throws ItemNotFoundException;// returns whole item
+	boolean editItem(Item item);// returns whole item
 
 	boolean deleteItem(int itemID);// returns true or false
-	
+
 }
