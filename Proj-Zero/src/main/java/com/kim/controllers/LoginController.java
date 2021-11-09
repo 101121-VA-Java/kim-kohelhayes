@@ -1,27 +1,27 @@
 package com.kim.controllers;
 
 import java.util.Scanner;
-
-import com.kim.exceptions.UserNotFoundException;
 import com.kim.models.User;
 import com.kim.services.UserService;
+import com.kim.repositories.UserDAO;
+import com.kim.repositories.UserPostgreSQL;
 
 public class LoginController {
 
-	private UserService us = new UserService();
-	User newUser;
+	private UserService us = new UserService(null);
+	
+	UserDAO ud = new UserPostgreSQL();
 	User currentUser;
 
-	public void searchForUser() {
-		// scanner getting user input
-		try {
-			User u = us.getUserById(0);
-		} catch (UserNotFoundException u) {
-			System.out.println("User doesn't exist.");
-			u.printStackTrace();
-		}
-	}
-//	TODO edit add employee not found exception here if not found	
-//	
+	public void tryLogin(Scanner scan) {
+		System.out.println("Please enter your username:");
+		String username = scan.nextLine();
+		System.out.println("Please enter your password:");
+		String password = scan.nextLine();
+		User usr = new User(username, password);
+		int curId = us.login(usr);
+		currentUser = us.getUser(curId);
+		us.userMenu(currentUser);
+	}	
 	
 }

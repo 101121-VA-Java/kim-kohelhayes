@@ -2,13 +2,17 @@ package com.kim.services;
 
 import java.util.Scanner;
 
+import com.kim.controllers.UserController;
 import com.kim.exceptions.UserFoundException;
+import com.kim.exceptions.UserNotFoundException;
 import com.kim.models.User;
 import com.kim.repositories.UserPostgreSQL;
+import com.kim.util.LogUtil;
 
 public class UserService {
 
 	private UserPostgreSQL ups = new UserPostgreSQL();
+	private UserController uc = new UserController();
 
 	public UserService(UserPostgreSQL ups) {
 		super();
@@ -36,9 +40,34 @@ public class UserService {
         return true;
 	}
 
-	public User getUserById(int i) {
-		// TODO Auto-generated method stub
-		return null;
+	public void tryLogin(User usr) throws UserNotFoundException {
+		int id = -1;
+		id = ups.getUserId(usr);
+		if (id < 0) {
+			LogUtil.descriptiveError("User Does Not Exist");
+			throw new UserNotFoundException();	
+		}
+	}	
+	
+	public int login(User usr) {
+		System.out.println("Login Successful!");
+		
+		int id = ups.getUserId(usr);
+		return id;
+	}
+
+	public User getUser(int curId) {
+		User currentUser = ups.getUserFromId(curId);
+		return currentUser;
+	}
+
+	public void userMenu(User currentUser) {
+		if(currentUser.getPosition() == "CUSTOMER") {
+			uc.customerMenu(currentUser);
+		}else {
+			uc.employeeMenu(currentUser);
+		}
+		
 	}
 
 //  public User login(String username, String password) throws UserNotFoundException{

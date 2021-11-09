@@ -43,15 +43,14 @@ public class UserPostgreSQL implements UserDAO {
 
 	@Override
 	public int getUserId(User user) {
-		String sql = "select id" + " from users" + " where" + "	n_me = ? AND" + "	username = ? AND" + "	pswrd = ?;";
+		String sql = "select id" + " from users" + " where" +"	username = ? AND" + "	pswrd = ?;";
 		int userID = 0;
 
 		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
 			PreparedStatement ps = con.prepareStatement(sql);
 
-			ps.setString(1, user.getName());
-			ps.setString(2, user.getUsername());
-			ps.setString(3, user.getPassword());
+			ps.setString(1, user.getUsername());
+			ps.setString(2, user.getPassword());
 
 			ResultSet rs = ps.executeQuery();
 
@@ -151,6 +150,31 @@ public class UserPostgreSQL implements UserDAO {
 		} else {
 			return false;
 		}
+	}
+
+
+	public User getUserFromId(int id) {
+		String sql = "select * from users where id = ?";
+		User usr = null;
+
+		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
+			Statement s = con.createStatement();
+			ResultSet rs = s.executeQuery(sql);
+
+			while (rs.next()) {
+				String name = rs.getString("n_me");
+				String username = rs.getString("username");
+				String password = rs.getString("pswrd");
+				String position = rs.getString("pstn");
+
+				usr = new User(id, name, username, password, position);
+				
+			}
+		} catch (SQLException | IOException u) {
+			u.printStackTrace();
+		}
+
+		return usr;
 	}
 
 

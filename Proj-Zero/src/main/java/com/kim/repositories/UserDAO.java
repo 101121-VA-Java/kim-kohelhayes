@@ -16,4 +16,5 @@ public interface UserDAO {
 
 	boolean deleteUser(int userID); // returns true or false
 	
+	User getUserFromId(int curId);
 }

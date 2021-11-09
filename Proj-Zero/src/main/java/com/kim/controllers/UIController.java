@@ -3,15 +3,18 @@ package com.kim.controllers;
 import java.util.Scanner;
 
 import com.kim.exceptions.UserFoundException;
+import com.kim.exceptions.UserNotFoundException;
 
 public class UIController {
 	
 	private Scanner scan;
 	private RegisterController rc;
+	private LoginController lc;
 	
 	public UIController() {
 		scan = new Scanner(System.in);
-		rc = new RegisterController();	
+		rc = new RegisterController();
+		lc = new LoginController();
 		}
 	
 
@@ -35,9 +38,15 @@ public class UIController {
 					System.out.println("Proceed to LogIn Menu!");
 					e.printStackTrace();
 				}
-				// TODO: if a user is not registered, display a different message
 				break;
 			case "2":
+				try {
+					lc.tryLogin(scan);
+				} catch (UserNotFoundException e1) {
+					System.out.println("User Does Not Exist!");
+					System.out.println("Go Back to Register Menu!");
+					e1.printStackTrace();
+				}
 				break;	
 			case "3":
 				run = false;
