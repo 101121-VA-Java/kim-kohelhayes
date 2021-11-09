@@ -1,47 +1,58 @@
 package com.kim.services;
 
+import java.util.Scanner;
 
-import java.util.List;
-
-import com.kim.exceptions.*;
-import com.kim.models.*;
-import com.kim.repositories.*;
+import com.kim.exceptions.UserFoundException;
+import com.kim.models.User;
+import com.kim.repositories.UserPostgreSQL;
 
 public class UserService {
 
-	private UserDAO usrDao = new UserPostgreSQL();
-	
-	public UserService() {
+	private UserPostgreSQL ups = new UserPostgreSQL();
+
+	public UserService(UserPostgreSQL ups) {
 		super();
-		List<User> usrs = usrDao.getAllUsers();
-		
+		this.ups = ups;
 	}
 
-	
+	public void registerUser(User usr) throws UserFoundException {
 
-	public void addUser(User newUser) {
-
-		
-
-		
+		if (usr.getId() != ups.getUserId(usr)) {
+			throw new UserFoundException();
+		}
 	}
-	
-	public User getUserById(int id) throws UserNotFoundException  {
 
-		if(id > 0) { // just for example's sake
-		throw new UserNotFoundException();
-		} 
+	public boolean register(User usr, int posChoice) {
+		if (posChoice == 1) usr.setPosition("CUSTOMER");
+		else usr.setPosition("EMPLOYEE");
+		int nwUsrId = -1;
+		try{
+			nwUsrId = ups.addUser(usr);
+            if(nwUsrId == -1) throw new Exception();
+        } catch(Exception e){
+            LogUtil.descriptiveError("Registration failed for some reason. ");
+            return false;
+        }
+        return true;
+	}
 
+	public User getUserById(int i) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
-
-
-	public int register(User newUser, String roleChoice) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	
+//  public User login(String username, String password) throws UserNotFoundException{
+//  try {
+//      for (User user : up.getAll()) {
+//          if(user.getUsername().equals(username) && user.getPassword().equals(password)){
+//              return user;
+//          }
+//      }
+//      throw new UserNotFoundException();
+//  } catch (UserNotFoundException e) {
+//      LogUtil.descriptiveError("User Not Found");
+//  }
+//  return null;
+//}
 
 }

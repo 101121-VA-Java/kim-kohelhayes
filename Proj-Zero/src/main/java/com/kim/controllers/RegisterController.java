@@ -5,57 +5,42 @@ import java.util.Scanner;
 import com.kim.exceptions.*;
 import com.kim.repositories.*;
 import com.kim.models.*;
-import com.kim.services.*;
+import com.kim.services.UserService;
 
 public class RegisterController {
 
-	private UserService us = new UserService();
+	private UserService us = new UserService(null);
 	UserDAO ud = new UserPostgreSQL();
-	private User currentUser;
-	
 
-	public void registerUser(Scanner scan) {
-
-		try {
-			System.out.println("Please enter your name: ");
-			String name = scan.nextLine();
-			System.out.println("Please enter a username:");
-			String username = scan.nextLine();
-			System.out.println("Please enter a password:");
-			String password = scan.nextLine();
-
-			try {
-				User newUser = new User(name, username, password);
-				User possibleUser = new User(name, username, password);
-				ud.getUserId(possibleUser);
-
-				try {
-					String posChoice = scan.nextLine();
-					int newUserId = us.register(newUser, posChoice);
-					System.out.println("Registration successful.");
-					System.out.println("Logged in as " + newUser.getUsername() + ".");
-					this.currentUser = newUser;
-					this.currentUser.setId(newUserId);
-				} catch (InvalidPosition e3) {
-					System.out.println("User must be 1: CUSTOMER or 2: EMPLOYEE");
-					System.out.println("TRY AGAIN!!");
-				}
-			} catch (UserFoundException e2) {
-				System.out.println("User Already Exists!");
-				System.out.println("Proceed to LogIn Menu!");
+	public void registerUser(Scanner scan) throws UserFoundException{
+		System.out.println("Please enter your name: ");
+		String name = scan.nextLine();
+			if(name.length() > 30 ) {
+				System.out.println("Name is too long! Try Again!");
+				name = scan.nextLine();
 			}
-		} catch (Exception e1) {
-			System.out.println("Name, Username or Password is Too Long!");
-			System.out.println("TRY AGAIN!!");
-		}
-
+		System.out.println("Please enter a username:");
+		String username = scan.nextLine();
+			if(username.length() > 20 ) {
+				System.out.println("Name is too long! Try Again!");
+				username = scan.nextLine();
+			}
+		System.out.println("Please enter a password:");
+		String password = scan.nextLine();
+			if(password.length() > 15 ) {
+				System.out.println("Name is too long! Try Again!");
+				password = scan.nextLine();
+			}
+		System.out.println("Enter 1: CUSTOMER or 2: EMPLOYEE");	
+		int posChoice = scan.nextInt();
+			while( posChoice != 1 || posChoice !=2 ) {
+				System.out.println("Enter 1: CUSTOMER or 2: EMPLOYEE");	
+				posChoice = scan.nextInt();
+			}
+		User potentialUser = new User(name, username, password);
+		us.register(potentialUser,posChoice);
 	}
-
-//		TODO edit add employee not found exception here if not found	
-//		
-//		 TODO: check whether an employee created or not (if the method works)
-//		us.addUser(newUser);
-//		
-//		System.out.println("Employee has been registered");
-
 }
+
+
+

@@ -2,14 +2,16 @@ package com.kim.controllers;
 
 import java.util.Scanner;
 
+import com.kim.exceptions.UserFoundException;
+
 public class UIController {
 	
 	private Scanner scan;
-	private UserController uc;
+	private RegisterController rc;
 	
 	public UIController() {
 		scan = new Scanner(System.in);
-		uc = new UserController();	
+		rc = new RegisterController();	
 		}
 	
 
@@ -26,7 +28,13 @@ public class UIController {
 			
 			switch(choice) {
 			case "1":
-				uc.registerUser(scan);
+				try {
+					rc.registerUser(scan);
+				} catch (UserFoundException e) {
+					System.out.println("User Already Exists!");
+					System.out.println("Proceed to LogIn Menu!");
+					e.printStackTrace();
+				}
 				// TODO: if a user is not registered, display a different message
 				break;
 			case "2":

@@ -8,7 +8,7 @@ import com.kim.services.*;
 
 public class UserController {
 
-	private UserService us = new UserService();
+	private UserService us = new UserService(null);
 
 	public void searchForUser() {
 		// scanner getting user input
