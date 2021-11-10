@@ -17,20 +17,14 @@ public class UserService {
 		this.ups = ups;
 	}
 
-	public void registerUser(User usr) throws UserFoundException {
-
-		if (usr.getId() != ups.getUserId(usr)) {
-			throw new UserFoundException();
-		}
-	}
-
 	public boolean register(User usr) {
 		int nwUsrId = -1;
 		try{
 			nwUsrId = ups.addUser(usr);
             if(nwUsrId == -1) throw new Exception();
         } catch(Exception e){
-            LogUtil.descriptiveError("Registration failed for some reason. ");
+            LogUtil.descriptiveError(
+            		"User was not created in the DataBase.  Check Log.");
             return false;
         }
         return true;
@@ -56,7 +50,7 @@ public class UserService {
 	}
 
 	public User userMenu(User currentUser) {
-		if(currentUser.getPosition() == "CUSTOMER") {
+		if(currentUser.getPosition().equals("CUSTOMER")) {
 			uc.customerMenu(currentUser, null);
 		}else {
 			uc.employeeMenu(currentUser, null);
