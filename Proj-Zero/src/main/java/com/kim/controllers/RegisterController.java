@@ -33,24 +33,26 @@ public class RegisterController {
 				System.out.println("Name is too long! Try Again!");
 				password = scan.nextLine();
 			}
+		User potentialUser = new User(0, name, username, password, null);
 		System.out.println("Enter 1: CUSTOMER or 2: EMPLOYEE");	
-		int posChoice = scan.nextInt();
-			if( posChoice != 1 | posChoice != 2 ) {
-				System.out.println("Enter 1: CUSTOMER or 2: EMPLOYEE");	
-				posChoice = scan.nextInt();
+		String posChoice = scan.nextLine();
+			if(posChoice.equals("CUSTOMER")) {
+				potentialUser.setPosition("CUSTOMER");
 			}
-			
-			
-		User potentialUser = new User(name, username, password);
-		
-		
-		
+			else if(posChoice.equals("EMPLOYEE")) {
+				potentialUser.setPosition("EMPLOYEE");
+			}
+			else {
+				System.out.println("Enter 1: CUSTOMER or 2: EMPLOYEE");	
+				posChoice = scan.nextLine();
+			}
+	
 		if (potentialUser.getId() != ups.getUserId(potentialUser)) {
 
 			throw new UserFoundException();
 		}
 		
-		us.register(potentialUser,posChoice);
+		us.register(potentialUser);
 	}
 	
 

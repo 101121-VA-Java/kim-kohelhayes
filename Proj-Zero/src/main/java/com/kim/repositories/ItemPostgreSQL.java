@@ -9,11 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.kim.exceptions.EmployeeNotFoundException;
-import com.kim.exceptions.ItemNotFoundException;
-import com.kim.models.Employee;
 import com.kim.models.Item;
-import com.kim.models.User;
 import com.kim.util.ConnectionUtil;
 
 public class ItemPostgreSQL implements ItemDAO {
@@ -46,7 +42,8 @@ public class ItemPostgreSQL implements ItemDAO {
 
 	@Override
 	public List<Item> getAllSaleItems() {
-		String sql = "SELECT item_id, item_name, description, dept FROM items WHERE status_id = 1;";
+		String sql = "SELECT item_id, item_name, description,"
+				+ " dept FROM items WHERE status_id = 1;";
 		List<Item> items = new ArrayList<>();
 
 		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
@@ -100,7 +97,8 @@ public class ItemPostgreSQL implements ItemDAO {
 
 	@Override
 	public int addItem(Item item) {
-		String sql = "insert into items (item_name, description, dept, status_id) values (?, ?, ?, ?, ?);";
+		String sql = "insert into items (item_name, description, dept, status_id)"
+				+ " values (?, ?, ?, ?, ?);";
 		int itId = -1;
 
 		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
@@ -125,7 +123,8 @@ public class ItemPostgreSQL implements ItemDAO {
 
 	@Override
 	public boolean editItem(Item item) {
-		String sql = "update items set item_id = ?, item_name = ?, description = ?, dept = ?, status_id = ?;";
+		String sql = "update items set item_id = ?, item_name = ?,"
+				+ " description = ?, dept = ?, status_id = ?;";
 
 		int rowsChanged = -1;
 

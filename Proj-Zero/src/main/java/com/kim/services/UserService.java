@@ -1,7 +1,5 @@
 package com.kim.services;
 
-import java.util.Scanner;
-
 import com.kim.controllers.UserController;
 import com.kim.exceptions.UserFoundException;
 import com.kim.exceptions.UserNotFoundException;
@@ -26,9 +24,7 @@ public class UserService {
 		}
 	}
 
-	public boolean register(User usr, int posChoice) {
-		if (posChoice == 1) usr.setPosition("CUSTOMER");
-		else usr.setPosition("EMPLOYEE");
+	public boolean register(User usr) {
 		int nwUsrId = -1;
 		try{
 			nwUsrId = ups.addUser(usr);

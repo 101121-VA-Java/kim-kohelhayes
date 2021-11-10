@@ -1,8 +1,5 @@
 package com.kim.services;
 
-import java.util.List;
-
-import com.kim.exceptions.ItemNotFoundException;
 import com.kim.models.Item;
 import com.kim.repositories.ItemDAO;
 import com.kim.repositories.ItemPostgreSQL;

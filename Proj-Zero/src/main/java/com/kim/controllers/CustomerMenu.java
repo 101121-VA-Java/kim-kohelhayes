@@ -20,14 +20,6 @@ public class CustomerMenu {
 	ItemService isr = new ItemService();
 
 
-	// TODO Auto-generated method stub
-	/*
-	 * makeAnOffer
-	 * viewAmountOwed
-	 *  - bonus - makeAPayment
-	 */
-
-
 	public void makeOffer(Scanner scan) {
 		// TODO Auto-generated method stub
 		

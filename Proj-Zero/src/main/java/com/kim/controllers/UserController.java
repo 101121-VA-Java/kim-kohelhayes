@@ -52,11 +52,11 @@ public class UserController {
 				cm.makePayment(cuId,scan);
 				break;
 			case "6":
-				ui.run();
+//				ui.run();
 				break;
 			default:
 				System.out.println("Invalid input.");
-				ui.run();
+//				ui.run();
 			}
 		}
 
@@ -103,11 +103,11 @@ public class UserController {
 				em.deleteItem(scan);
 				break;
 			case "7":
-				ui.run();
+//				ui.run();
 				break;
 			default:
 				System.out.println("Invalid input.");
-				ui.run();
+//				ui.run();
 			}
 		}
 

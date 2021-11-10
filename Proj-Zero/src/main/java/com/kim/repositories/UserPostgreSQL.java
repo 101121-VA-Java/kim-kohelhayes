@@ -241,16 +241,45 @@ public class UserPostgreSQL implements UserDAO {
 		return users;
 	}
 	
+//	@Override
+//	public List<User> makePayment(int usrId) {
+//		String sql = "SELECT u.n_me AS u_name,"
+//				+ " c.amount_owed AS amt_owed,"
+//				+ " c.amount_owed - SUM(p.amount) AS new_amount_owed"
+//				+ " FROM customers c"
+//				+ " JOIN customer_payments cp ON cp.c_id = c.c_id"
+//				+ " JOIN payments p ON p.pay_id = cp.p_id"
+//				+ " JOIN users u ON c.user_id = u.id"
+//				+ " WHERE u.id = ?"
+//				+ " GROUP BY u.n_me, c.amount_owed;";
+//		
+//		List<User> users = new ArrayList<>();
+//		
+//		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
+//			PreparedStatement ps = con.prepareStatement(sql);
+//
+//			ps.setInt(1, usrId);
+//
+//			ResultSet rs = ps.executeQuery();
+//
+//			if (rs.next()) {
+//				
+//				double amountOwed = rs.getDouble("amt_owed");
+//				
+//				User nwUsr = new User(amountOwed);
+//				users.add(nwUsr);
+//			}
+//
+//		} catch (SQLException | IOException it) {
+//			it.printStackTrace();
+//
+//		}
+//
+//		return users;
+//	}
+//	
 	
-//SELECT u.n_me AS u_name,
-//c.amount_owed AS amt_owed,
-//c.amount_owed - SUM(p.amount)
-//FROM customers c  	
-//JOIN customer_payments cp ON cp.c_id = c.c_id   
-//JOIN payments p ON p.pay_id = cp.p_id 
-//JOIN users u ON c.user_id = u.id
-//WHERE u.id = ?
-//GROUP BY u.n_me, c.amount_owed;
+
 
 
 
