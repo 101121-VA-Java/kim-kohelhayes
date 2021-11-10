@@ -7,24 +7,50 @@ public class Item {
 	private int id;
 	private String name;
 	private String description;
-	private int dept_id;
+	private String dept;
 	private int status_id;
 
-	public Item(int id, String name, String description, int dept_id, int status_id) {
+	public Item(int id, String name, String description, String dept, int status_id) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
-		this.dept_id = dept_id;
+		this.dept = dept;
 		this.status_id = status_id;
 	}
 
-	public Item(String name, String description, int dept_id, int status_id) {
+	public Item(String name, String description, String dept, int status_id) {
 		super();
 		this.name = name;
 		this.description = description;
-		this.dept_id = dept_id;
+		this.dept = dept;
 		this.status_id = status_id;
+	}
+
+	public Item(int id, String name, String description, String dept) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.dept = dept;
+	}
+	
+	public Item(String name, String description, String dept) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.dept = dept;
+	}
+	
+	public Item(String name, String description) {
+		super();
+		this.name = name;
+		this.description = description;
+	}
+	
+	public Item(String name) {
+		super();
+		this.name = name;
 	}
 
 	public int getId() {
@@ -51,12 +77,12 @@ public class Item {
 		this.description = description;
 	}
 
-	public int getDept_id() {
-		return dept_id;
+	public String getDept() {
+		return dept;
 	}
 
-	public void setDept_id(int dept_id) {
-		this.dept_id = dept_id;
+	public void setDept(String dept) {
+		this.dept = dept;
 	}
 
 	public int getStatus_id() {
@@ -69,13 +95,13 @@ public class Item {
 
 	@Override
 	public String toString() {
-		return "Item [id=" + id + ", name=" + name + ", description=" + description + ", dept_id=" + dept_id
+		return "Item [id=" + id + ", name=" + name + ", description=" + description + ", dept=" + dept
 				+ ", status_id=" + status_id + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(dept_id, description, id, name, status_id);
+		return Objects.hash(dept, description, id, name, status_id);
 	}
 
 	@Override
@@ -87,7 +113,7 @@ public class Item {
 		if (getClass() != obj.getClass())
 			return false;
 		Item other = (Item) obj;
-		return dept_id == other.dept_id && Objects.equals(description, other.description) && id == other.id
+		return dept == other.dept && Objects.equals(description, other.description) && id == other.id
 				&& Objects.equals(name, other.name) && status_id == other.status_id;
 	}
 

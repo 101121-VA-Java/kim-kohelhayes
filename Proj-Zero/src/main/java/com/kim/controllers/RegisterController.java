@@ -9,10 +9,12 @@ import com.kim.services.UserService;
 
 public class RegisterController {
 
+	private UserPostgreSQL ups = new UserPostgreSQL();
 	private UserService us = new UserService(null);
 	UserDAO ud = new UserPostgreSQL();
 
-	public void registerUser(Scanner scan) throws UserFoundException{
+	public void registerUser(Scanner scan) throws UserFoundException {
+
 		System.out.println("Please enter your name: ");
 		String name = scan.nextLine();
 			if(name.length() > 30 ) {
@@ -33,13 +35,25 @@ public class RegisterController {
 			}
 		System.out.println("Enter 1: CUSTOMER or 2: EMPLOYEE");	
 		int posChoice = scan.nextInt();
-			while( posChoice != 1 || posChoice !=2 ) {
+			if( posChoice != 1 | posChoice != 2 ) {
 				System.out.println("Enter 1: CUSTOMER or 2: EMPLOYEE");	
 				posChoice = scan.nextInt();
 			}
+			
+			
 		User potentialUser = new User(name, username, password);
+		
+		
+		
+		if (potentialUser.getId() != ups.getUserId(potentialUser)) {
+
+			throw new UserFoundException();
+		}
+		
 		us.register(potentialUser,posChoice);
 	}
+	
+
 }
 
 

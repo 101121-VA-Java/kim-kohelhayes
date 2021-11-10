@@ -13,6 +13,7 @@ import com.kim.exceptions.EmployeeNotFoundException;
 import com.kim.exceptions.ItemNotFoundException;
 import com.kim.models.Employee;
 import com.kim.models.Item;
+import com.kim.models.User;
 import com.kim.util.ConnectionUtil;
 
 public class ItemPostgreSQL implements ItemDAO {
@@ -27,17 +28,41 @@ public class ItemPostgreSQL implements ItemDAO {
 			ResultSet rs = s.executeQuery(sql);
 
 			while (rs.next()) {
-				int id = rs.getInt("id");
-				String name = rs.getString("n_me");
+				int id = rs.getInt("item_id");
+				String name = rs.getString("item_name");
 				String description = rs.getString("description");
-				int dept_id = rs.getInt("dept_id");
+				String dept = rs.getString("dept");
 				int status_id = rs.getInt("status_id");
-				Item newItem = new Item(id, name, description, dept_id, status_id);
+				Item newItem = new Item(id, name, description, dept, status_id);
 				items.add(newItem);
 			}
-		} catch (SQLException it) {
+
+		} catch (SQLException | IOException it) {
 			it.printStackTrace();
-		} catch (IOException it) {
+		}
+
+		return items;
+	}
+
+	@Override
+	public List<Item> getAllSaleItems() {
+		String sql = "SELECT item_id, item_name, description, dept FROM items WHERE status_id = 1;";
+		List<Item> items = new ArrayList<>();
+
+		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
+			Statement s = con.createStatement();
+			ResultSet rs = s.executeQuery(sql);
+
+			while (rs.next()) {
+				int id = rs.getInt("item_id");
+				String name = rs.getString("item_name");
+				String description = rs.getString("description");
+				String dept = rs.getString("dept");
+				Item newItem = new Item(id, name, description, dept);
+				items.add(newItem);
+			}
+
+		} catch (SQLException | IOException it) {
 			it.printStackTrace();
 		}
 
@@ -46,7 +71,7 @@ public class ItemPostgreSQL implements ItemDAO {
 
 	@Override
 	public Item getItemById(int itemID) {
-		String sql = "select * from items where items.id = ? ";
+		String sql = "select * from items where id = ? ";
 		Item item = null;
 
 		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
@@ -57,12 +82,12 @@ public class ItemPostgreSQL implements ItemDAO {
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
-				int id = rs.getInt("id");
-				String name = rs.getString("n_me");
+				int id = rs.getInt("item_id");
+				String name = rs.getString("item_name");
 				String description = rs.getString("description");
-				int dept_id = rs.getInt("dept_id");
+				String dept = rs.getString("dept");
 				int status_id = rs.getInt("status_id");
-				item = new Item(id, name, description, dept_id, status_id);
+				item = new Item(id, name, description, dept, status_id);
 			}
 
 		} catch (SQLException | IOException it) {
@@ -74,33 +99,33 @@ public class ItemPostgreSQL implements ItemDAO {
 	}
 
 	@Override
-	public boolean addItem(Item item) {
-		String sql = "insert into items (n_me, description, dept_id, status_id) " + "values (?, ?, ?, ?, ?);";
+	public int addItem(Item item) {
+		String sql = "insert into items (item_name, description, dept, status_id) values (?, ?, ?, ?, ?);";
+		int itId = -1;
 
 		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
 			PreparedStatement ps = con.prepareStatement(sql);
 
 			ps.setString(1, item.getName());
 			ps.setString(2, item.getDescription());
-			ps.setInt(3, item.getDept_id());
+			ps.setString(3, item.getDept());
 			ps.setInt(4, item.getStatus_id());
 
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
-				return true;
+				itId = rs.getInt("id");
 			}
-
-		} catch (SQLException | IOException it) {
-			it.printStackTrace();
+		} catch (SQLException | IOException u) {
+			u.printStackTrace();
 		}
 
-		return false;
+		return itId;
 	}
 
 	@Override
 	public boolean editItem(Item item) {
-		String sql = "update items set id = ?, n_me = ?, description = ?, dept_id = ?," + " status_id = ?;";
+		String sql = "update items set item_id = ?, item_name = ?, description = ?, dept = ?, status_id = ?;";
 
 		int rowsChanged = -1;
 
@@ -110,14 +135,12 @@ public class ItemPostgreSQL implements ItemDAO {
 			ps.setInt(1, item.getId());
 			ps.setString(2, item.getName());
 			ps.setString(3, item.getDescription());
-			ps.setInt(4, item.getDept_id());
+			ps.setString(4, item.getDept());
 			ps.setInt(5, item.getStatus_id());
 
 			rowsChanged = ps.executeUpdate();
 
-		} catch (SQLException it) {
-			it.printStackTrace();
-		} catch (IOException it) {
+		} catch (SQLException | IOException it) {
 			it.printStackTrace();
 		}
 
@@ -130,7 +153,7 @@ public class ItemPostgreSQL implements ItemDAO {
 
 	@Override
 	public boolean deleteItem(int itemID) {
-		String sql = "delete from items where employees.id = ?;";
+		String sql = "delete from items where item_id = ?;";
 
 		int rowsChanged = -1;
 
@@ -149,6 +172,40 @@ public class ItemPostgreSQL implements ItemDAO {
 		} else {
 			return false;
 		}
+	}
+
+	@Override
+	public List<Item> getAllMyItems(int usrId) {
+		String sql = "SELECT i.item_name AS item_name"
+				+ " FROM customer_items ci"
+				+ " JOIN customers c ON ci.cust_id = c.c_id"
+				+ " JOIN users u ON c.user_id = u.id"
+				+ " JOIN items i ON ci.item_id = i.item_id"
+				+ " WHERE u.id = ?;";
+		
+		List<Item> items = new ArrayList<>();
+		
+		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
+			PreparedStatement ps = con.prepareStatement(sql);
+
+			ps.setInt(1, usrId); // 1 refers to the first '?'
+
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				
+				String name = rs.getString("item_name");
+				
+				Item nwItm = new Item(name);
+				items.add(nwItm);
+			}
+
+		} catch (SQLException | IOException it) {
+			it.printStackTrace();
+
+		}
+
+		return items;
 	}
 
 }

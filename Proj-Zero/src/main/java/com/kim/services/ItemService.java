@@ -6,43 +6,31 @@ import com.kim.exceptions.ItemNotFoundException;
 import com.kim.models.Item;
 import com.kim.repositories.ItemDAO;
 import com.kim.repositories.ItemPostgreSQL;
+import com.kim.util.LogUtil;
 
 public class ItemService {
 	private ItemDAO itmDao = new ItemPostgreSQL();
+	private ItemPostgreSQL ips = new ItemPostgreSQL();
 	
 	public ItemService() {
-		super();
-		List<Item> itms = itmDao.getAllItems();
-		for (Item i : itms) {
-			System.out.println(i);
-		}
 	}
 
-
-	public void addItem(Item newItm) {
-
-		/*
-		 * add business logic here to manipulate u before storage
-		 * when employees add a new Item they are going to input 
-		 * 		- item.name
-		 * 		- item.description
-		 * 		- item.dept_id //see department table for names
-		 * 
-		 * System should assign 
-		 * 	-item status - 1
-		 * 		
-		 */
-		
-		
-	}
-	
-	public Item getItemById(int id) throws ItemNotFoundException  {
-
-		if(id > 0) { // just for example's sake
-		throw new ItemNotFoundException();
-		} 
-
-		return null;
+	public boolean getItemDetails(Item nwItm, int dptNum) {
+		if (dptNum == 1) nwItm.setDept("GROCERY");
+		if (dptNum == 2) nwItm.setDept("PETS");
+		if (dptNum == 3) nwItm.setDept("BABY");
+		else nwItm.setDept("GARDEN");
+		nwItm.setStatus_id(1);
+		System.out.println(nwItm);
+		int nwUsrId = -1;
+		try{
+			nwUsrId = ips.addItem(nwItm);
+            if(nwUsrId == -1) throw new Exception();
+        } catch(Exception e){
+            LogUtil.descriptiveError("Registration failed for some reason. ");
+            return false;
+        }
+        return true;
 	}
 
 	

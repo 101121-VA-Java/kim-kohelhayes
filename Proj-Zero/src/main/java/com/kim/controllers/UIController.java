@@ -18,10 +18,10 @@ public class UIController {
 		}
 	
 
-	public void run() {
-		boolean run = true;
+	public void main() {
+		boolean main = true;
 		
-		while(run) {
+		while(main) {
 			System.out.println("Please select an option:");
 			System.out.println("1: New Users Register Here");
 			System.out.println("2: Login Here");
@@ -49,7 +49,7 @@ public class UIController {
 				}
 				break;	
 			case "3":
-				run = false;
+				main = false;
 				break;
 			default:
 				System.out.println("Invalid input.");
@@ -60,11 +60,3 @@ public class UIController {
 	
 	}
 }
-
-//
-//System.out.println("Please select an option:");
-//System.out.println("1: Customers Register Here");
-//System.out.println("2: Customers Login Here");
-//System.out.println("3: Employees Register Here");
-//System.out.println("4: Employees Login Here");
-//System.out.println("3: exit");

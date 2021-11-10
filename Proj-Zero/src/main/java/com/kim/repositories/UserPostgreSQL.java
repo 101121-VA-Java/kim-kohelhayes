@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kim.models.Item;
 import com.kim.models.User;
 import com.kim.util.ConnectionUtil;
 
@@ -40,10 +41,66 @@ public class UserPostgreSQL implements UserDAO {
 		return users;
 	}
 
+	@Override
+	public User getUserById(int id) {
+		String sql = "select * from Users where u_id = ? ";
+		User usr = null;
+		
+		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
+			PreparedStatement ps = con.prepareStatement(sql);
+			
+			ps.setInt(1, id); 	
+			
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				String name = rs.getString("n_me");
+				String username = rs.getString("username");
+				String password = rs.getString("pswrd");
+				String position = rs.getString("pstn");
+
+				usr = new User(id, name, username, password, position);
+			}
+		} catch (SQLException | IOException e) {
+			e.printStackTrace();
+		} 
+		return usr;
+	}
 
 	@Override
+	public User getUser(User user) {
+		String sql = "select * from users where username = ? AND" 
+					+ "	pswrd = ?;";
+		User usr = null;
+
+		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
+			PreparedStatement ps = con.prepareStatement(sql);
+
+			ps.setString(1, user.getUsername());
+			ps.setString(2, user.getPassword());
+
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				int id = rs.getInt("id");
+				String name = rs.getString("n_me");
+				String username = rs.getString("username");
+				String password = rs.getString("pswrd");
+				String position = rs.getString("pstn");
+
+				usr = new User(id, name, username, password, position);
+			}
+		} catch (SQLException | IOException u) {
+			u.printStackTrace();
+		}
+
+		return usr;
+	}
+	
+	@Override
 	public int getUserId(User user) {
-		String sql = "select id" + " from users" + " where" +"	username = ? AND" + "	pswrd = ?;";
+		String sql = "select id from users where username = ? AND" 
+					+ "	pswrd = ?;";
 		int userID = 0;
 
 		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
@@ -152,30 +209,49 @@ public class UserPostgreSQL implements UserDAO {
 		}
 	}
 
-
-	public User getUserFromId(int id) {
-		String sql = "select * from users where id = ?";
-		User usr = null;
-
+	@Override
+	public List<User> getOwedAmt(int usrId) {
+		String sql = "SELECT c.amount_owed AS amt_owed"
+				+ " FROM customers c"
+				+ " JOIN users u ON c.user_id = u.id"
+				+ " WHERE u.id = ?;";
+		
+		List<User> users = new ArrayList<>();
+		
 		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
-			Statement s = con.createStatement();
-			ResultSet rs = s.executeQuery(sql);
+			PreparedStatement ps = con.prepareStatement(sql);
 
-			while (rs.next()) {
-				String name = rs.getString("n_me");
-				String username = rs.getString("username");
-				String password = rs.getString("pswrd");
-				String position = rs.getString("pstn");
+			ps.setInt(1, usrId);
 
-				usr = new User(id, name, username, password, position);
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
 				
+				double amountOwed = rs.getDouble("amt_owed");
+				
+				User nwUsr = new User(amountOwed);
+				users.add(nwUsr);
 			}
-		} catch (SQLException | IOException u) {
-			u.printStackTrace();
+
+		} catch (SQLException | IOException it) {
+			it.printStackTrace();
+
 		}
 
-		return usr;
+		return users;
 	}
+	
+	
+//SELECT u.n_me AS u_name,
+//c.amount_owed AS amt_owed,
+//c.amount_owed - SUM(p.amount)
+//FROM customers c  	
+//JOIN customer_payments cp ON cp.c_id = c.c_id   
+//JOIN payments p ON p.pay_id = cp.p_id 
+//JOIN users u ON c.user_id = u.id
+//WHERE u.id = ?
+//GROUP BY u.n_me, c.amount_owed;
+
 
 
 }

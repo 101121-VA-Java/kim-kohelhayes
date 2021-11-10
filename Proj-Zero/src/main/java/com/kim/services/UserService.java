@@ -40,48 +40,33 @@ public class UserService {
         return true;
 	}
 
-	public void tryLogin(User usr) throws UserNotFoundException {
+	public int checkUser(User usr) throws UserNotFoundException {
+		User user = ups.getUser(usr);
+		
 		int id = -1;
-		id = ups.getUserId(usr);
+		id = ups.getUserId(user);
 		if (id < 0) {
 			LogUtil.descriptiveError("User Does Not Exist");
 			throw new UserNotFoundException();	
+		}else {
+			System.out.println("Login Successful!");
 		}
-	}	
-	
-	public int login(User usr) {
-		System.out.println("Login Successful!");
-		
-		int id = ups.getUserId(usr);
 		return id;
-	}
+	}	
 
 	public User getUser(int curId) {
-		User currentUser = ups.getUserFromId(curId);
+		User currentUser = ups.getUserById(curId);
 		return currentUser;
 	}
 
-	public void userMenu(User currentUser) {
+	public User userMenu(User currentUser) {
 		if(currentUser.getPosition() == "CUSTOMER") {
-			uc.customerMenu(currentUser);
+			uc.customerMenu(currentUser, null);
 		}else {
-			uc.employeeMenu(currentUser);
+			uc.employeeMenu(currentUser, null);
 		}
-		
+		return currentUser;
 	}
 
-//  public User login(String username, String password) throws UserNotFoundException{
-//  try {
-//      for (User user : up.getAll()) {
-//          if(user.getUsername().equals(username) && user.getPassword().equals(password)){
-//              return user;
-//          }
-//      }
-//      throw new UserNotFoundException();
-//  } catch (UserNotFoundException e) {
-//      LogUtil.descriptiveError("User Not Found");
-//  }
-//  return null;
-//}
 
 }

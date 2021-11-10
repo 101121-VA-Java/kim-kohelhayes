@@ -7,6 +7,10 @@ import com.kim.models.User;
 public interface UserDAO {
 	
 	List<User> getAllUsers();
+	
+	User getUser(User user);
+	
+	User getUserById(int id);
 
 	int getUserId(User user); //returns User id
 	
@@ -16,5 +20,6 @@ public interface UserDAO {
 
 	boolean deleteUser(int userID); // returns true or false
 	
-	User getUserFromId(int curId);
+	List<User> getOwedAmt(int usrId);
+	
 }

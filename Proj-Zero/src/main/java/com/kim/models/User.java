@@ -4,11 +4,12 @@ import java.util.Objects;
 
 public class User {
 
-	protected int id;
-	protected String name;
-	protected String username;
-	protected String password;
-	protected String position;
+	private int id;
+	private String name;
+	private String username;
+	private String password;
+	private String position;
+	private double amountOwed;
 
 	public User(int id, String name, String username, String password, String position) {
 		super();
@@ -38,6 +39,11 @@ public class User {
 		super();
 		this.username = username;
 		this.password = password;
+	}
+	
+	public User(double amountOwed) {
+		super();
+		this.amountOwed = amountOwed;
 	}
 	
 	public User(int id2) {
@@ -84,15 +90,23 @@ public class User {
 		this.position = position;
 	}
 
+	public double getAmountOwed() {
+		return amountOwed;
+	}
+
+	public void setAmountOwed(double amountOwed) {
+		this.amountOwed = amountOwed;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", username=" + username + ", password=" + password + ", position="
-				+ position + "]";
+				+ position + ", amountOwed=" + amountOwed + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, name, password, position, username);
+		return Objects.hash(amountOwed, id, name, password, position, username);
 	}
 
 	@Override
@@ -104,7 +118,8 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		return id == other.id && Objects.equals(name, other.name) && Objects.equals(password, other.password)
+		return Double.doubleToLongBits(amountOwed) == Double.doubleToLongBits(other.amountOwed) && id == other.id
+				&& Objects.equals(name, other.name) && Objects.equals(password, other.password)
 				&& Objects.equals(position, other.position) && Objects.equals(username, other.username);
 	}
 
